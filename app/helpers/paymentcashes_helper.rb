@@ -1,0 +1,2 @@
+module PaymentcashesHelper
+end

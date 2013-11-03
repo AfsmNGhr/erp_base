@@ -1,0 +1,32 @@
+<h1>Список сотрудников</h1>
+
+<% if flash[:error] %>
+    <div id="error_explanation"><h2><%= flash[:error] %></h2></div>
+<% end %>
+
+<table>
+  <tr>
+    <th>ФИО</th>
+    <th>Должность</th>
+    <th>Дата рождения</th>
+    <th>Паспорт</t>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @staffs.each do |staff| %>
+  <tr>
+    <td><%= link_to staff.lname+" "+staff.fname+" "+staff.mname, staff %></td>
+    <td><%= staff.position %></td>
+    <td><%= staff.birthday %></td>
+    <td><%= staff.passport %></td>
+    <td><%= link_to 'Edit', edit_staff_path(staff) %></td>
+    <td><%= link_to 'Destroy', staff, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Добавить сотрудника', new_staff_path %>

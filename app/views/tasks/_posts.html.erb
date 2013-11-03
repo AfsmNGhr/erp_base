@@ -1,0 +1,23 @@
+<fieldset>
+    <legend><h4>Комментарии</h4></legend>
+<div class="row dot_line">
+ <div class="small-8 columns"><b>Текст</b></div>
+ <div class="small-2 columns"><b>Автор</b></div>
+ <div class="small-2 columns"><b>Дата</b></div>
+</div>
+
+
+<% Post.where(task_id: params[:id]).each do |post| 
+     color=cycle '#fff5ee', '#fff'
+  %>
+  <div class="row dot_line">
+    <div class="small-8 columns" style="background-color:<%= color %>"><%= post.text %></div>
+    <div class="small-2 columns" style="background-color:<%= color %>"><%= Staff.find(post.staff_id).lname %></div>
+    <div class="small-2 columns" style="background-color:<%= color %>"><%= post.created_at.strftime("%Y-%m-%d %H:%M") %></div>
+  </div>
+<% end %>
+
+<br />
+
+<a href=/posts/new/?task_id=<%=params[:id] %> , class="button radius">Добавить комментарий</a>
+</fieldset>

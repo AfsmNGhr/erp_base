@@ -1,0 +1,67 @@
+<%= form_for(@workobject) do |f| %>
+  <% if @workobject.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@workobject.errors.count, "error") %> prohibited this workobject from being saved:</h2>
+
+      <ul>
+      <% @workobject.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+  <div class="large-6 columns">
+<fieldset>
+    <legend>Адрес</legend>
+  <div class="field">
+    <%= f.label 'Название' %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label "Город" %>
+    <%= f.text_field :city %>
+  </div>
+  <div class="field">
+    <%= f.label "Адрес" %>
+    <%= f.text_field :address %>
+  </div>
+  <div class="field">
+    <%= f.label "Регион" %>
+    <%= f.text_field :region %>
+  </div>
+  <div class="field">
+    <%= f.label "Статус" %>
+    <%= f.select :status, workobject_status_list {|st| [st[1],st[0]] }, {include_blank: true} %>
+  </div>
+</fieldset>
+</div>
+<div class="large-6 columns">
+<fieldset>
+    <legend>Информация</legend>
+  <div class="field">
+    <%= f.label "Ответственный" %>
+    <%= f.select :staff_id, Staff.all.collect {|st| [st.fullname ,st.id] }, {include_blank: true} %>
+  </div>
+  <div class="field">
+    <%= f.label "Широта" %>
+    <%= f.text_field :latitude %>
+  </div>
+  <div class="field">
+    <%= f.label "Долгота" %>
+    <%= f.text_field :longtitude %>
+  </div>
+  <div class="field">
+    <%= f.label "Процент завершенности" %>
+    <% 0.step(100,20) do |st| %>
+      <%= f.radio_button :complete, st %><font style="background-color:<%=color_for_fontbg_hash[st]%>"><%=st%></font>
+    <% end %>  
+  </div>
+</fieldset>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+ </div>
+</div>
+<% end %>

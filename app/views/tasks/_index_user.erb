@@ -1,0 +1,25 @@
+<h1>Список задач</h1>
+
+<table>
+  <tr>
+    <th>Описание</th>
+    <th>Объект</th>
+    <th>Автор</th>
+    <th>Начало</th>
+    <th>Окончание</th>
+    <th>% Выполнения</th>
+    <th>Статус</th>
+  </tr>
+
+<% Task.where(staff_id: @staff_login.id).each do |task| %>
+  <tr>
+    <td><%= link_to task.description, task %></td>
+    <td><%= link_to Workobject.find(task.workobject_id).fulladdr, workobject_path(task.workobject_id) unless task.workobject_id.nil? %></td>
+    <td><%= Staff.find(task.staff_from_id).fullname unless task.staff_from_id.nil? %></td>
+    <td><%= task.sdate %></td>
+    <td><%= task.edate %></td>
+    <td><%= task.progress %></td>
+    <td><%= task_status_hash[task.state] %></td>
+  </tr>
+<% end %>
+</table>

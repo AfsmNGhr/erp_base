@@ -1,0 +1,33 @@
+<%= form_for(@staff_task_journal) do |f| %>
+  <% if @staff_task_journal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@staff_task_journal.errors.count, "error") %> prohibited this staff_task_journal from being saved:</h2>
+
+      <ul>
+      <% @staff_task_journal.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Сотрудник" %><br />
+    <%= f.select :staff_id, Staff.all.collect {|st| [st.fullname ,st.id] }, {include_blank: true} %>
+  </div>
+  <div class="field">
+    <%= f.label "Задача" %><br />
+    <%= f.select :task_id, Task.all.collect {|task| [task.fullname ,task.id] }, {include_blank: true} %>
+  </div>
+  <div class="field">
+    <%= f.label "Начало работы" %><br />
+    <%= f.date_select :sdate %>
+  </div>
+  <div class="field">
+    <%= f.label "Окончание" %><br />
+    <%= f.date_select :edate %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

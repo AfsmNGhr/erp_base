@@ -1,0 +1,26 @@
+<h1>Список документов</h1>
+
+<table>
+  <tr>
+    <th>Задача</th>
+    <th>Имя файла</th>
+    <th>Размер</th>
+    <th>Дата</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @uploads.each do |file| %>
+  <tr>
+    <td><%= link_to Task.find(file.task_id).fullname, task_path(file.task_id)  %></td>
+    <td><%= link_to file.filename, upload_path(file) %></td>
+    <td><%= file.size %></td>
+    <td><%= file.created_at %></td>
+    <td><%= link_to 'Edit', edit_upload_path(file) %></td>
+    <td><%= link_to 'Destroy', file, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<%= link_to 'Новый файл', new_upload_path %>

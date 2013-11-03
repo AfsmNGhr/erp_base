@@ -1,0 +1,24 @@
+<div class="row display">
+ <div class="small-6 large-6 columns">
+   <p id="notice"><%= notice %></p>
+   <p> <b>Название:</b> <%= @workobject.name %> </p>
+   <p> <b>Город:</b> <%= @workobject.city %> </p>
+   <p> <b>Адрес:</b> <%= @workobject.address %> </p>
+   <p> <b>Регион:</b> <%= @workobject.region %> </p>
+   <p> <b>Ответственный:</b> <%= Staff.find(@workobject.staff_id).fullname %> </p>
+   <p> <b>Широта:</b> <%= @workobject.latitude %> <b>Долгота:</b> <%= @workobject.longtitude %> </p>
+   <p> <b>Статус:</b> <%= workobject_status_hash[@workobject.status] %> </p>
+   <p> <b>% завершения:</b> <%= @workobject.complete %> </p>
+   <%= link_to 'Edit', edit_workobject_path(@workobject) %> |
+   <%= link_to 'Back', workobjects_path %>
+ </div>
+ <div class="small-6 large-6 columns">
+  <%= render 'staff' %>
+ </div>
+</div>
+<p><br>
+<div class="row">
+  <div class="small-12 columns">
+    <%= render "post" %>
+  </div>
+</div>

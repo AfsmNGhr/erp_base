@@ -1,0 +1,29 @@
+<h1>Журнал планирования работ сотрудников</h1>
+
+<table>
+  <tr>
+    <th>Сотрудник</th>
+    <th>Задача</th>
+    <th>Начало работы</th>
+    <th>Окончание</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @staff_task_journals.each do |staff_task_journal| %>
+  <tr>
+    <td><%= Staff.find(staff_task_journal.staff_id).fullname %></td>
+    <td><%= Task.find(staff_task_journal.task_id).fullname %></td>
+    <td><%= staff_task_journal.sdate %></td>
+    <td><%= staff_task_journal.edate %></td>
+    <td><%= link_to 'Show', staff_task_journal %></td>
+    <td><%= link_to 'Edit', edit_staff_task_journal_path(staff_task_journal) %></td>
+    <td><%= link_to 'Destroy', staff_task_journal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Staff task journal', new_staff_task_journal_path %>

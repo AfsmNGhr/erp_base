@@ -1,0 +1,26 @@
+  <h4>Отчеты</h4>
+<table>
+  <tr><th>Дата</th><th>Текст</th><th>Файлы</th></tr>
+
+
+<% posts_join_upload_hash(@workobject.id).each do |dd,row|
+  %>
+  <tr>
+    <td width=10%><%= dd %></td>
+    <td>
+     <% row[0].each do |pp| %>
+       <%=pp[1]%><br><b> =<%= Staff.find(pp[2]).lname %></b>
+     <% end %>
+    </td>
+    <td>
+      <% row[1].each do |up| %>
+        <img src=/paper-clip.png>
+        <a href=/uploads/<%=up[0]%>><%= up[1]%></a> <%= (up[2].to_i/1024).to_i %>Kb</br>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
+</table>
+<p><br>
+<a href=/posts/new/?workobject_id=<%= params[:id]%>>Добавить Отчет</a><br>
+<a href=/uploads/new?workobject_id=<%= params[:id]%>>Добавить файл</a><br>

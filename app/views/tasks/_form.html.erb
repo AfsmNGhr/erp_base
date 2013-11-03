@@ -1,0 +1,53 @@
+<%= form_for(@task) do |f| %>
+  <% if @task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+      <ul>
+      <% @task.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div class="field">
+      <b>Описание:</b><br>
+      <%= f.text_area :description %>
+    </div>
+    <div class="field">
+      <b>Сотрудник:</b><br>
+      <%= f.select :staff_id, Staff.all.collect {|st| [st.fullname ,st.id] }, {include_blank: true} %>
+    </div>
+    <div class="field">
+      <b>Объект:</b><br>
+      <%= f.select :workobject_id, Workobject.all.collect {|wo| [wo.name+", "+wo.city+", "+wo.address,wo.id] }, {include_blank: true} %>
+    </div>
+    <div class="row">
+      <div class="large-3 columns">
+        <div class="field">
+          <b>Начало:</b><br>
+          <input type=date name="task[sdate]" value=<%=@task.sdate%> placeholder="large-2.columns">
+        </div>
+      </div>
+      <div class="large-3 columns">
+        <div class="field">
+          <b>Окончание:</b><br>
+          <input type=date name="task[edate]" value=<%=@task.edate%> placeholder="large-2.columns">
+        </div>
+      </div>
+    </div><br>
+    <div class="field">
+     <b>Выполение:</b><br>
+     <% 0.step(100,20) do |st| %>
+       <%= f.radio_button :progress, st %><font style="background-color:<%=color_for_fontbg_hash[st]%>"><%=st%></font>
+    <% end %>
+    </div>
+    <div class="field">
+      <b>Статус:</b><br>
+      <%= f.select :state, task_status_hash.each.collect {|key,value| [value,key]}%>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

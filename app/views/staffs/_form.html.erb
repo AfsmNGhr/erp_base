@@ -1,0 +1,60 @@
+<%= form_for(@staff) do |f| %>
+  <% if @staff.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@staff.errors.count, "error") %> prohibited this staff from being saved:</h2>
+
+      <ul>
+      <% @staff.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+  <div class="large-6 columns">
+
+  <div class="field">
+    <%= f.label "Фамилия" %><br />
+    <%= f.text_field :lname %>
+  </div>
+  <div class="field">
+    <%= f.label "Имя" %><br />
+    <%= f.text_field :fname %>
+  </div>
+  <div class="field">
+    <%= f.label "Отчество" %><br />
+    <%= f.text_field :mname %>
+  </div>
+  <div class="field">
+    <%= f.label "Должность" %><br />
+    <%= f.text_field :position %>
+  </div>
+  <div class="field">
+    <%= f.label "Дата рождения" %><br />
+    <%= f.date_select :birthday, start_year: 1945, end_year: Time.now.year - 15 %>
+  </div>
+</div>
+  <div class="large-6 columns">
+  <div class="field">
+    <%= f.label "Паспорт" %><br />
+    <%= f.text_field :passport %>
+  </div>
+  <div class="field">
+    <%= f.label "email" %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label "Login" %><br />
+    <%= f.text_field :login%>
+  </div>
+  <div class="field">
+    <%= f.label "Password" %><br />
+    <%= f.text_field :password %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+ </div>
+</div>
+<% end %>

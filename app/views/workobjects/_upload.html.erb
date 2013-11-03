@@ -1,0 +1,20 @@
+<h4>Список документов</h4>
+
+<div class="row">
+ <div class="small-3 columns"><b>Имя файла</b></div>
+ <div class="small-3 columns"><b>Размер</b></div>
+ <div class="small-3 columns"><b>Дата</b></div>
+ <div class="small-3 columns"><b>X</b></div>
+</div>
+
+<% @wo_uploads.each do |file| %>
+  <div class="row">
+    <div class="small-3 columns"><%= link_to file.filename, upload_path(file) %></div>
+    <div class="small-3 columns"><%= file.size %></div>
+    <div class="small-3 columns"><%= file.created_at.strftime("%Y-%m-%d") %></div>
+    <div class="small-3 columns"><%= link_to 'Destroy', file, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+  </div>
+<% end %>
+
+<br />
+<%= link_to 'Новый файл', new_upload_path %>

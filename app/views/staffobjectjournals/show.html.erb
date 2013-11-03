@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Сотрудник:</b>
+  <%= Staff.find(@staffobjectjournal.staff_id).fullname %>
+</p>
+
+<p>
+  <b>Объект:</b>
+  <%= Workobject.find(@staffobjectjournal.workobject_id).fulladdr %>
+</p>
+
+<p>
+  <b>Начало работы:</b>
+  <%= @staffobjectjournal.sdate %>
+</p>
+
+<p>
+  <b>Окончание:</b>
+  <%= @staffobjectjournal.edate %>
+</p>
+
+
+<%= link_to 'Edit', edit_staffobjectjournal_path(@staffobjectjournal) %> |
+<%= link_to 'Back', staffobjectjournals_path %>

@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Когда:</b>
+  <%= @paymentcash.when %>
+</p>
+
+<p>
+  <b>Кому:</b>
+  <%= @paymentcash.staff.fullname %>
+</p>
+
+<p>
+  <b>Сколько:</b>
+  <%= @paymentcash.how_many %>
+</p>
+
+
+<%= link_to 'Edit', edit_paymentcash_path(@paymentcash) %> |
+<%= link_to 'Back', paymentcashes_path %>

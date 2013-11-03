@@ -1,0 +1,50 @@
+<div class="row display">
+ <div class="small-4 columns">
+<fieldset>
+    <legend><h4>Задача</h4></legend>
+<p>
+  <b>Описание:</b>
+  <%= @task.description %>
+</p>
+<p>
+  <b>Автор:</b>
+  <%= Staff.find(TaskDelegate.where(task_id: @task.id).first.staff_from).fullname %>
+</p>
+<% if ! @task.workobject_id.nil? %>
+<p>
+  <b>Объект:</b>
+  <%= Workobject.find(@task.workobject_id).fulladdr%>
+</p>
+<% end %>
+<p>
+  <b>Начало:</b>
+  <%= @task.sdate %>
+</p>
+
+<p>
+  <b>Окончение:</b>
+  <%= @task.edate %>
+</p>
+
+<p>
+  <b>Выполения:</b>
+  <font style="background-color:<%=color_for_fontbg_hash[@task.progress]%>"><%= @task.progress %>%</font>
+</p>
+
+<p>
+  <b>Статус:</b>
+  <%= task_status_hash[@task.state] %>
+</p>
+
+
+<%= link_to 'Edit', edit_task_path(@task) %> |
+<%= link_to 'Back', tasks_path %>
+
+</fieldset>
+</div>
+
+<div class="small-8 columns">
+<%= render "posts" %>
+<%= render "history" %>
+</div>
+</div>
