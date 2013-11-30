@@ -1,14 +1,23 @@
-<h1>Список задач</h1>
+<div class="row display">
+ <div class="small-3 columns">
+  <h1>Список задач</h1>
+ </div>
+ <div class="small-2 small-offset-7 columns">
+  <%= link_to 'Добавить задачу', new_task_path, class: "button radius"  %>
+ </div>
+</div>
+
 
 <table>
   <tr>
-    <th>Описание</th>
-    <th>Объект</th>
-    <th>Исполнитель</th>
-    <th>Начало</th>
-    <th>Окончание</th>
-    <th>% Выполнения</th>
-    <th>Статус</th>
+    <th><%= sortable "description", "Описание" %></th>
+    <th><%= sortable "workobject_id", "Объект" %></th>
+    <th><%= sortable "staff_from_id", "Автор" %></th>
+    <th><%= sortable "staff_id", "Исполнитель" %></th>
+    <th><%= sortable "sdate", "Начало" %></th>
+    <th><%= sortable "edate", "Окончание" %></th>
+    <th><%= sortable "progress", "% Выполнения" %></th>
+    <th><%= sortable "state", "Статус" %></th>
     <th></th>
     <th></th>
   </tr>
@@ -17,9 +26,10 @@
   <tr>
     <td><%= link_to task.description, task %></td>
     <td><%= link_to Workobject.find(task.workobject_id).fulladdr, workobject_path(task.workobject_id) unless task.workobject_id.nil? %></td>
+    <td><%= Staff.find(task.staff_from_id).fullname unless task.staff_from_id.nil? %></td>
     <td><%= Staff.find(task.staff_id).fullname unless task.staff_id.nil? %></td>
-    <td><%= task.sdate %></td>
-    <td><%= task.edate %></td>
+    <td width=6%><%= task.sdate %></td>
+    <td width=6%><%= task.edate %></td>
     <td><%= task.progress %></td>
     <td><%= task_status_hash[task.state] %></td>
     <td><%= link_to 'Edit', edit_task_path(task) %></td>
@@ -27,7 +37,3 @@
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'Добавить задачу', new_task_path %>

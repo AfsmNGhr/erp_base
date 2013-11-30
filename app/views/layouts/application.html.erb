@@ -17,7 +17,9 @@
         <title>База</title>
 
   	<%= stylesheet_link_tag    "application" %>
+        <%= javascript_include_tag "application" %>
   	<%= javascript_include_tag "vendor/custom.modernizr" %>
+
     <%= csrf_meta_tags %>
   </head>
 
@@ -35,8 +37,6 @@
       <li><a href="/tasks" style="<%= "background: #363018;" if request.fullpath=~/^\/tasks/%>">Задачи</a></li>
       <li class="divider"></li>
       <li><a href="/staffobjectjournals" style="<%= "background: #363018;" if request.fullpath=~/^\/staffo/%>">Журнал</a></li>
-      <li class="divider"></li>
-      <li><a href="/uploads" style="<%= "background: #363018;" if request.fullpath=~/^\/upload/%>">Файлы</a></li>
       <li class="divider"></li>
       <li><a href="/paymentcashes" style="<%= "background: #363018;" if request.fullpath=~/^\/payment/%>">Выплаты</a></li>
     </ul>

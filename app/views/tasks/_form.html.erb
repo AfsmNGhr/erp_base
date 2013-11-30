@@ -13,8 +13,14 @@
 
     <div class="field">
       <b>Описание:</b><br>
-      <%= f.text_area :description %>
+      <textarea cols="40" id="task_description" name="task[description]" >...</textarea>
     </div>
+<script type="text/javascript">
+$('task_description').keyup(function(){
+        $(this).height(100);
+        $(this).height(this.scrollHeight);
+});
+</script>
     <div class="field">
       <b>Сотрудник:</b><br>
       <%= f.select :staff_id, Staff.all.collect {|st| [st.fullname ,st.id] }, {include_blank: true} %>

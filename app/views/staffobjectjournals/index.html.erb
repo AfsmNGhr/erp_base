@@ -18,8 +18,8 @@
 
 <% @staffobjectjournals.each do |staffobjectjournal| %>
   <tr>
-    <td><%= Staff.find(staffobjectjournal.staff_id).fullname %></td>
-    <td><%= Workobject.find(staffobjectjournal.workobject_id).fulladdr %></td>
+    <td><%= Staff.find(staffobjectjournal.staff_id).fullname if Staff.exists?(staffobjectjournal.staff_id) %></td>
+    <td><%= Workobject.find(staffobjectjournal.workobject_id).fulladdr if Workobject.exists?(staffobjectjournal.workobject_id) %></td>
     <td><%= staffobjectjournal.sdate %></td>
     <td><%= staffobjectjournal.edate %></td>
     <td><%= staff_obj_status_hash[staffobjectjournal.status] %></td>

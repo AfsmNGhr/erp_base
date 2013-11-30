@@ -18,6 +18,7 @@ class UploadsController < ApplicationController
   def show
     @upload = Upload.find(params[:id])
     directory = "uploads/#{@upload.workobject_id}"
+    directory = "uploads_task/#{@upload.task_id}" unless @upload.task_id.nil?
     path = File.join(directory, @upload.filename)
     send_file path, :type => "Content-Type", :disposition => 'attachment; filename='+@upload.filename
 
@@ -67,7 +68,8 @@ class UploadsController < ApplicationController
     upld = Upload.new
     upld.rrr_upload(params[:filename],params[:uploads],@staff_login.id)
     respond_to do |format|
-      format.html { redirect_to action: 'index', status: 303 }
+      format.html { redirect_to params[:ref], notice: 'Upload was successfully created.' }
+#action: 'index', status: 303 
     end
   end
 

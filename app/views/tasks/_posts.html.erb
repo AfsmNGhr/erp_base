@@ -1,23 +1,70 @@
 <fieldset>
     <legend><h4>Комментарии</h4></legend>
-<div class="row dot_line">
- <div class="small-8 columns"><b>Текст</b></div>
- <div class="small-2 columns"><b>Автор</b></div>
- <div class="small-2 columns"><b>Дата</b></div>
+
+
+<table width=100%>
+  <tr><th width=10%>Дата</th><th width=60%>Текст</th><th width=30%>Файлы</th></tr>
+
+
+<% reps_join_upload_hash(@task.id).each do |dd,row|
+  %>
+  <tr>
+    <td width=10%><%= dd %></td>
+    <td width=60%>
+     <% row[0].each do |pp| %>
+       <%=pp[1]%><br><b> =<%= Staff.find(pp[2]).lname if Staff.exists?(pp[2]) %></b><br>
+     <% end %>
+    </td>
+    <td width=30%>
+      <% row[1].each do |up| %>
+        <img src=/paper-clip.png>
+        <a href=/uploads/<%=up[0]%>><%= up[1]%></a> <%= (up[2].to_i/1024).to_i %>Kb</br>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br/>
+
+<div id=addpost style="display:none">
+
+<form accept-charset="UTF-8" action="/posts" class="new_post" id="new_post" method="post"><input name="utf8" type="hidden" value="&#x2713;" />
+ 
+  <div class="field">
+    <b>Текст</b>
+    <textarea cols="40" id="post_text" name="post[text]" rows="20">
+    </textarea>
+  </div>
+  <div class="actions">
+    <input name="commit" type="submit" value="Добавить" />
+  </div> 
+  <div>
+   <a href=# onclick="addpost.style.display='none'" class=slist ><b>Отмена</b></a>
+  </div>
+  <input type=hidden name=ref value=/tasks/<%=params[:id]%>>
+  <input type=hidden name="post[task_id]" value=<%=params[:id]%>>
+ </form>
 </div>
 
+<div id=addfile  style="display:none">
+<form accept-charset="UTF-8" action="/uploads/upload" enctype="multipart/form-data" method="post"><input name="utf8" type="hidden" value="&#x2713;" />
 
-<% Post.where(task_id: params[:id]).each do |post| 
-     color=cycle '#fff5ee', '#fff'
-  %>
-  <div class="row dot_line">
-    <div class="small-8 columns" style="background-color:<%= color %>"><%= post.text %></div>
-    <div class="small-2 columns" style="background-color:<%= color %>"><%= Staff.find(post.staff_id).lname %></div>
-    <div class="small-2 columns" style="background-color:<%= color %>"><%= post.created_at.strftime("%Y-%m-%d %H:%M") %></div>
+  <div class="field">
+    <b>Выберите файл</b><br />
+    <input id="filename" name="filename" type="file" />
   </div>
-<% end %>
+  <div class="actions">
+    <input name="commit" type="submit" value="Upload" />
+  </div>
+  <div>
+   <a href=# onclick="addfile.style.display='none'" class=slist ><b>Отмена</b></a>
+  </div>
+  <input type=hidden name=ref value=/tasks/<%=params[:id]%>>
+  <input type=hidden name="uploads[task_id]" value=<%=params[:id]%>>
+ </form>
+</div>
 
-<br />
-
-<a href=/posts/new/?task_id=<%=params[:id] %> , class="button radius">Добавить комментарий</a>
+<a href=# onclick="addpost.style.display='';addfile.style.display='none';"  class="button radius">Добавить комментарий</a>
+<a href=# onclick="addfile.style.display='';addpost.style.display='none'"  class="button radius">Добавить файл</a>
 </fieldset>

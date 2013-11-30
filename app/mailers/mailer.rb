@@ -7,4 +7,9 @@ class Mailer < ActionMailer::Base
     @task = task
     mail(to: staff_to.email, subject: "Поступила новая задача")
   end
+
+  def not_found_report(wo)
+    @wo=wo
+    mail(to: "de@cettex.ru", subject: "Отсутствует отчет")
+  end
 end

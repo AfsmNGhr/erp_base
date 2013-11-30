@@ -1,11 +1,12 @@
 class WorkobjectsController < ApplicationController
-  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
   before_filter :authorize, :except => [:index, :show]
+  include TasksHelper
+  helper_method :sort_column, :sort_direction
 
   # GET /workobjects
   # GET /workobjects.json
   def index
-    @workobjects = Workobject.all
+    @workobjects = Workobject.order(sort_column + " " + sort_direction)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -89,8 +90,11 @@ class WorkobjectsController < ApplicationController
   end
 
   private
-    def record_not_found
-      write_attribute(:description," ")
-      write_attribute(:workobject_id,0)
-    end
+  def sort_column
+    Workobject.column_names.include?(params[:sort]) ? params[:sort] : "id"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
 end

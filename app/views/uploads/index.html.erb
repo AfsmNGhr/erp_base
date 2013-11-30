@@ -1,4 +1,11 @@
-<h1>Список документов</h1>
+<div class="row display">
+ <div class="small-4 columns">
+  <h2>Список документов</h2>
+ </div>
+ <div class="small-2 small-offset-7 columns">
+  <%= link_to 'Новый файл', new_upload_path, class: "button radius"  %>
+ </div>
+</div>
 
 <% if flash[:error] %>
     <div id="error_explanation"><h2><%= flash[:error] %></h2></div>
@@ -31,4 +38,3 @@
 </table>
 
 <br />
-<%= link_to 'Новый файл', new_upload_path %>

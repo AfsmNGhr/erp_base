@@ -1,4 +1,11 @@
-<h1>Список сотрудников</h1>
+<div class="row display">
+ <div class="small-5 columns">
+  <h1>Список сотрудников</h1>
+ </div>
+ <div class="small-2 small-offset-5 columns">
+  <%= link_to 'Добавить сотрудника', new_staff_path, class: "button radius"  %>
+ </div>
+</div>
 
 <% if flash[:error] %>
     <div id="error_explanation"><h2><%= flash[:error] %></h2></div>
@@ -26,7 +33,3 @@
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'Добавить сотрудника', new_staff_path %>

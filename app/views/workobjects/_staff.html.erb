@@ -11,7 +11,7 @@
 
 <% @wo_staff.each do |st_wo| %>
   <tr>
-    <td><%= link_to Staff.find(st_wo.staff_id).fullname, st_wo %></td>
+    <td><%= link_to Staff.find(st_wo.staff_id).fullname , st_wo  if Staff.exists?(st_wo.staff_id)%></td>
     <td><%= st_wo.sdate %></td>
     <td><%= st_wo.edate %></td>
     <td><%= link_to 'Edit', edit_staffobjectjournal_path(st_wo) %></td>

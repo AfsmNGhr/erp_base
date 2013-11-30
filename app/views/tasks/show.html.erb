@@ -8,12 +8,12 @@
 </p>
 <p>
   <b>Автор:</b>
-  <%= Staff.find(TaskDelegate.where(task_id: @task.id).first.staff_from).fullname %>
+  <%= @staff_from_fullname %>
 </p>
 <% if ! @task.workobject_id.nil? %>
 <p>
   <b>Объект:</b>
-  <%= Workobject.find(@task.workobject_id).fulladdr%>
+  <%= @wo_fulladdr%>
 </p>
 <% end %>
 <p>
@@ -22,7 +22,7 @@
 </p>
 
 <p>
-  <b>Окончение:</b>
+  <b>Окончание:</b>
   <%= @task.edate %>
 </p>
 
@@ -44,7 +44,11 @@
 </div>
 
 <div class="small-8 columns">
-<%= render "posts" %>
 <%= render "history" %>
 </div>
+</div>
+<div class="row display">
+ <div class="small-12 columns">
+   <%= render "posts" %>
+ </div>
 </div>

@@ -15,41 +15,45 @@
   <div class="large-6 columns">
 
   <div class="field">
-    <%= f.label "Фамилия" %><br />
+    <b>Фамилия:</b>
     <%= f.text_field :lname %>
   </div>
   <div class="field">
-    <%= f.label "Имя" %><br />
+    <b>Имя:</b>
     <%= f.text_field :fname %>
   </div>
   <div class="field">
-    <%= f.label "Отчество" %><br />
+    <b>Отчество:</b>
     <%= f.text_field :mname %>
   </div>
   <div class="field">
-    <%= f.label "Должность" %><br />
+    <b>Должность:</b>
     <%= f.text_field :position %>
   </div>
   <div class="field">
-    <%= f.label "Дата рождения" %><br />
-    <%= f.date_select :birthday, start_year: 1945, end_year: Time.now.year - 15 %>
+    <b>Дата рождения:</b>
+    <input type=date name="staff[birthday]" value=<%=@staff.birthday%> placeholder="large-2.columns">
   </div>
 </div>
   <div class="large-6 columns">
   <div class="field">
-    <%= f.label "Паспорт" %><br />
+    <bПаспорт:</b>
     <%= f.text_field :passport %>
   </div>
   <div class="field">
-    <%= f.label "email" %><br />
+    <b>Email:</b>
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label "Login" %><br />
+    <b>Phone:</b>
+    <%= f.text_field :phone1 %>
+  </div>
+  <div class="field">
+    <b>Login:</b>
     <%= f.text_field :login%>
   </div>
   <div class="field">
-    <%= f.label "Password" %><br />
+    <b>Password:</b>
     <%= f.text_field :password %>
   </div>
   <div class="actions">

@@ -12,13 +12,21 @@
   <% end %>
 
   <div class="field">
-    <%= label_tag "Выберите файл" %><br />
+    <b>Выберите файл</b><br />
     <%= file_field_tag 'filename' %>
   </div>
   <div class="field">
-    <%= label_tag "Объект" %><br />
-    <%= select :uploads, :workobject_id, Workobject.all.collect {|wo| [wo.fulladdr[0,60],wo.id] }, {include_blank: true,:selected=>params['workobject_id']} %>
+    <% if ! params['workobject_id'].nil? %>
+      <b>Объект</b><br />
+      <%= select :uploads, :workobject_id, Workobject.all.collect {|wo| [wo.fulladdr[0,60],wo.id] }, {include_blank: true,:selected=>params['workobject_id']} %>
+    <% end %>
+    <% if ! params['task_id'].nil? %>
+      <b>Задача</b><br />
+      <%= select :uploads, :task_id, Task.all.collect {|wo| [wo.description,wo.id] }, {include_blank: true,:selected=>params['task_id']} %>
+    <% end %>
   </div>
   <div class="actions">
     <%= submit_tag %>
   </div>
+  <input type=hidden name=ref value=<%=params[:ref]%>>
+</form>
