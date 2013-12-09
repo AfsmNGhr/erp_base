@@ -1,0 +1,35 @@
+<h1>Журнал планирования работ сотрудников</h1>
+
+<% if flash[:error] %>
+    <div id="error_explanation"><h2><%= flash[:error] %></h2></div>
+<% end %>
+
+<table>
+  <tr>
+    <th>Сотрудник</th>
+    <th>Объект</th>
+    <th>C</th>
+    <th>По</th>
+    <th>Статус</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @staffobjectjournals.each do |staffobjectjournal| %>
+  <tr>
+    <td><%= Staff.find(staffobjectjournal.staff_id).fullname if Staff.exists?(staffobjectjournal.staff_id) %></td>
+    <td><%= Workobject.find(staffobjectjournal.workobject_id).fulladdr if Workobject.exists?(staffobjectjournal.workobject_id) %></td>
+    <td><%= staffobjectjournal.sdate %></td>
+    <td><%= staffobjectjournal.edate %></td>
+    <td><%= staff_obj_status_hash[staffobjectjournal.status] %></td>
+    <td><%= link_to 'Show', staffobjectjournal %></td>
+    <td><%= link_to 'Edit', edit_staffobjectjournal_path(staffobjectjournal) %></td>
+    <td><%= link_to 'Destroy', staffobjectjournal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Новая запись', new_staffobjectjournal_path, class: "button radius" %>

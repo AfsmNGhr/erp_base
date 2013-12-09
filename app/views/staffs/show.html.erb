@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Фамилия:</b>
+  <%= @staff.lname %>
+</p>
+
+<p>
+  <b>Имя:</b>
+  <%= @staff.fname %>
+</p>
+
+<p>
+  <b>Отчество:</b>
+  <%= @staff.mname %>
+</p>
+
+<p>
+  <b>Должность:</b>
+  <%= @staff.position %>
+</p>
+
+<p>
+  <b>Дата рождения:</b>
+  <%= @staff.birthday %>
+</p>
+
+<p>
+  <b>Паспорт:</b>
+  <%= @staff.passport %>
+</p>
+
+
+<%= link_to 'Edit', edit_staff_path(@staff) %> |
+<%= link_to 'Back', staffs_path %>
+
+<%= render 'workobject' %>

@@ -1,0 +1,24 @@
+<h1>Список задач</h1>
+
+<table>
+  <tr>
+    <th>Описание</th>
+    <th>Начало</th>
+    <th>Окончение</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @staff_tasks.each do |st_task| %>
+  <tr>
+    <td><%= link_to Task.find(st_task.task_id).fullname, st_task %></td>
+    <td><%= st_task.sdate %></td>
+    <td><%= st_task.edate %></td>
+    <td><%= link_to 'Edit', edit_task_path(st_task) %></td>
+    <td><%= link_to 'Destroy', st_task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Добавить задачу', new_staff_task_journal_path, staff_id: 1 %>
+

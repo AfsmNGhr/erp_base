@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+  	<meta charset="utf-8" />
+
+  	<!-- Uncomment to make IE8 render like IE7 -->
+  	<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+
+  	<!-- Set the viewport width to device width for mobile -->
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!--  	<title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title> -->
+        <title>База</title>
+
+  	<%= stylesheet_link_tag    "application" %>
+        <%= javascript_include_tag "application" %>
+  	<%= javascript_include_tag "vendor/custom.modernizr" %>
+
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+<nav class="top-bar">
+  <section class="top-bar-section">
+    <ul class="left">
+      <li class="divider"></li>
+      <li><a href="/map" style="<%= "background: #363018;" if request.fullpath=~/^\/map/%>">Карта</a></li>
+      <li class="divider"></li>
+      <li><a href="/workobjects" style="<%= "background: #363018;" if request.fullpath=~/^\/workobjects/%>">Объекты</a></li>
+      <li class="divider"></li>
+      <li><a href="/staffs" style="<%= "background: #363018;" if request.fullpath=~/^\/staffs/%>">Сотрудники</a></li>
+      <li class="divider"></li>
+      <li><a href="/tasks" style="<%= "background: #363018;" if request.fullpath=~/^\/tasks/%>">Задачи</a></li>
+      <li class="divider"></li>
+      <li><a href="/staffobjectjournals" style="<%= "background: #363018;" if request.fullpath=~/^\/staffo/%>">Журнал</a></li>
+      <li class="divider"></li>
+      <li><a href="/paymentcashes" style="<%= "background: #363018;" if request.fullpath=~/^\/payment/%>">Выплаты</a></li>
+    </ul>
+  </section>
+</nav>
+<div class="row">
+  <div class="twelve columns centered">
+    <%= yield %>
+  <div>
+</div>
+    
+    <%= javascript_include_tag "application" %>
+  </body>
+</html>

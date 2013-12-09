@@ -1,0 +1,32 @@
+<%= form_tag 'upload', multipart: true %>
+  <% if @upload.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@upload.errors.count, "error") %> prohibited this upload from being saved:</h2>
+
+      <ul>
+      <% @upload.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <b>Выберите файл</b><br />
+    <%= file_field_tag 'filename' %>
+  </div>
+  <div class="field">
+    <% if ! params['workobject_id'].nil? %>
+      <b>Объект</b><br />
+      <%= select :uploads, :workobject_id, Workobject.all.collect {|wo| [wo.fulladdr[0,60],wo.id] }, {include_blank: true,:selected=>params['workobject_id']} %>
+    <% end %>
+    <% if ! params['task_id'].nil? %>
+      <b>Задача</b><br />
+      <%= select :uploads, :task_id, Task.all.collect {|wo| [wo.description,wo.id] }, {include_blank: true,:selected=>params['task_id']} %>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= submit_tag %>
+  </div>
+  <input type=hidden name=ref value=<%=params[:ref]%>>
+</form>

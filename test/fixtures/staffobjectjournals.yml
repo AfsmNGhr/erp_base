@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  edate: 2013-09-05
+  sdate: 2013-09-05
+  staff_id: 1
+  workobject_id: 1
+
+two:
+  edate: 2013-09-05
+  sdate: 2013-09-05
+  staff_id: 1
+  workobject_id: 1

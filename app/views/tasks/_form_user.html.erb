@@ -1,0 +1,58 @@
+<%= form_for(@task) do |f| %>
+  <% if @task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+      <ul>
+      <% @task.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="row display">
+ <div class="small-4 columns">
+<fieldset>
+    <legend><h4>Редактирование задачи</h4></legend>
+<p>
+  <b>Описание:</b>
+  <%= @task.description %>
+</p>
+<% if ! @task.workobject_id.nil? %>
+<p>
+  <b>Объект:</b>
+  <%= Workobject.find(@task.workobject_id).fulladdr%>
+</p>
+<% end %>
+<p>
+  <b>Начало:</b>
+  <%= @task.sdate %>
+</p>
+
+<p>
+  <b>Окончание:</b>
+  <%= @task.edate %>
+</p>
+
+    <div class="field">
+     <b>Выполение:</b><br>
+     <% 0.step(100,20) do |st| %>
+       <%= f.radio_button :progress, st %><font style="background-color:<%=color_for_fontbg_hash[st]%>"><%=st%></font>
+    <% end %>
+    </div>
+    <div class="field">
+      <b>Статус:</b><br>
+      <%= f.select :state, task_status_hash.each.collect {|key,value| [value,key]}%>
+    </div>
+  <div class="field">
+    <b>Приоритет:</b><br>
+    <%= f.select :priority, task_priority_hash.each.collect {|key,value| [value,key]}%>
+  </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+ </fieldset>
+ </div>
+</div>
+
+<% end %>

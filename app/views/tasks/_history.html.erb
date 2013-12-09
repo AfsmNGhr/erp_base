@@ -1,0 +1,35 @@
+<fieldset>
+    <legend><h4>История</h4></legend>
+<div class="row dot_line">
+ <div class="small-4 columns"><b>Кто</b></div>
+ <div class="small-4 columns"><b>Когда</b></div>
+ <div class="small-4 columns"><b>Кому</b></div>
+</div>
+
+<% logger.debug "!!!" %>
+
+<% TaskDelegate.where(task_id: params[:id]).each do |dlg| 
+     color=cycle '#fff5ee', '#fff'
+  %>
+  <div class="row dot_line">
+    <div class="small-4 columns" style="background-color:<%= color %>"><%= Staff.find(dlg.staff_from).fullname unless dlg.staff_from.nil? %></div>
+    <div class="small-4 columns" style="background-color:<%= color %>"><%= dlg.created_at.strftime("%Y-%m-%d %H:%M") %></div>
+    <div class="small-4 columns" style="background-color:<%= color %>"><%= Staff.find(dlg.staff_to).fullname unless dlg.staff_to.nil? %></div>
+  </div>
+<% end %>
+
+  <div id=divdlg style="display:none">
+    <%= form_for(@task) do |f| %>
+      <div class="field">
+        <b>Делегировать задачу сотруднику:</b><br>
+        <%= f.select :staff_id, Staff.all.collect {|st| [st.fullname ,st.id] }, {include_blank: true} %>
+        <div class="actions">
+          <%= f.submit %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+<br>
+<a href=# onclick="divdlg.style.display='';">Делегировать задачу</a>
+</fieldset>

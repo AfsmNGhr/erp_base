@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  task_id: 1
+  staff_from: 1
+  staff_to: 1
+  when: 2013-10-16 22:21:44
+
+two:
+  task_id: 1
+  staff_from: 1
+  staff_to: 1
+  when: 2013-10-16 22:21:44

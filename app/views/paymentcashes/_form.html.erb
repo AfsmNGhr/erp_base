@@ -1,0 +1,29 @@
+<%= form_for(@paymentcash) do |f| %>
+  <% if @paymentcash.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@paymentcash.errors.count, "error") %> prohibited this paymentcash from being saved:</h2>
+
+      <ul>
+      <% @paymentcash.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Когда:" %><br />
+    <input type=date name="paymentcash[when]" value=<%=@paymentcash.when%> size=2>
+  </div>
+  <div class="field">
+    <%= f.label "Кому:" %><br />
+    <%= f.select :staff_id, Staff.all.collect {|st| [st.fullname ,st.id] }, {include_blank: true} %>
+  </div>
+  <div class="field">
+    <%= f.label "Сколько:" %><br />
+    <%= f.text_field :how_many, size:20 %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

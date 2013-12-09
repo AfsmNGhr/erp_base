@@ -1,0 +1,29 @@
+<h1>Список выплат</h1>
+
+
+
+<table>
+  <tr>
+    <th>Когда</th>
+    <th>Кому</th>
+    <th>Сколько</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @paymentcashes.each do |paymentcash| %>
+  <tr>
+    <td><%= paymentcash.when %></td>
+    <td><%= Staff.find(paymentcash.staff_id).fullname %></td>
+    <td><%= paymentcash.how_many %></td>
+    <td><%= link_to 'Show', paymentcash %></td>
+    <td><%= link_to 'Edit', edit_paymentcash_path(paymentcash) %></td>
+    <td><%= link_to 'Destroy', paymentcash, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Новая выплата', new_paymentcash_path %>

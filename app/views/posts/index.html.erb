@@ -1,0 +1,30 @@
+<h1>Listing posts</h1>
+
+<table>
+  <tr>
+    <th>Text</th>
+    <th>Staff</th>
+    <th>Task</th>
+    <th>WorkObject</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% rr = params[:task_id].nil? ? @posts : Post.where(task_id: params[:task_id])
+   rr.each do |post| %>
+  <tr>
+    <td><%= post.text %></td>
+    <td><%= post.staff.fullname %></td>
+    <td><%= post.task.description unless post.task.nil? %></td>
+    <td><%= post.workobject.fulladdr unless post.workobject.nil? %></td>
+    <td><%= link_to 'Show', post %></td>
+    <td><%= link_to 'Edit', edit_post_path(post) %></td>
+    <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Post', new_post_path %>

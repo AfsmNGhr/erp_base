@@ -1,0 +1,40 @@
+<div class="row display">
+ <div class="small-4 columns">
+  <h2>Список документов</h2>
+ </div>
+ <div class="small-2 small-offset-7 columns">
+  <%= link_to 'Новый файл', new_upload_path, class: "button radius"  %>
+ </div>
+</div>
+
+<% if flash[:error] %>
+    <div id="error_explanation"><h2><%= flash[:error] %></h2></div>
+  <% end %>
+
+<table>
+  <tr>
+    <th>Объект</th>
+    <th>Имя файла</th>
+    <th>Размер</th>
+    <th>Дата</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @uploads.each do |file| %>
+  <tr>
+    <% if file.workobject_id.nil? %>
+       <td>%nbsp;</td>
+    <% else %>
+      <td><%= link_to Workobject.find(file.workobject_id).fulladdr, workobject_path(file.workobject_id)  %></td>
+    <% end %>
+    <td><%= link_to file.filename, upload_path(file) %></td>
+    <td><%= file.size %></td>
+    <td><%= file.created_at %></td>
+    <td><%= link_to 'Edit', edit_upload_path(file) %></td>
+    <td><%= link_to 'Destroy', file, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />

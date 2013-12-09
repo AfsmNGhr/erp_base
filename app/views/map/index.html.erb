@@ -1,0 +1,57 @@
+    <script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
+    <script src="http://yandex.st/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        ymaps.ready(init);
+        var myMap, 
+            myPlacemark;
+
+        function init(){ 
+            myMap = new ymaps.Map ("map", {
+                center: [47.2382, 39.7095],
+                zoom: 7
+            }); 
+            myMap.controls.add('zoomControl');
+            myMap.controls.add('searchControl');
+            
+    // Обработка события, возникающего при щелчке
+    // левой кнопкой мыши в любой точке карты.
+    // При возникновении такого события откроем балун.
+    myMap.events.add('click', function (e) {
+        if (!myMap.balloon.isOpen()) {
+            var coords = e.get('coordPosition');
+            myMap.balloon.open(coords, {
+                contentBody:'<a href=/workobjects/new?latitude='+ coords[0].toPrecision(6) + '&longtitude=' + coords[1].toPrecision(6) + '>Добавить новый объект</a>',
+                contentFooter:'<sup>Координаты щелчка: ' + [
+                    coords[0].toPrecision(6),
+                    coords[1].toPrecision(6)
+                    ].join(', ') + '</sup>'
+            });
+        }
+        else {
+            myMap.balloon.close();
+        }
+    });
+
+    // Обработка события, возникающего при щелчке
+    // правой кнопки мыши в любой точке карты.
+    // При возникновении такого события покажем всплывающую подсказку
+    // в точке щелчка.
+    myMap.events.add('contextmenu', function (e) {
+        myMap.hint.show(e.get('coordPosition'), 'Кто-то щелкнул правой кнопкой');
+    });
+
+          <% @workobjects.each do |wo| %>
+            <% if ! wo.latitude.empty? && ! wo.longtitude.empty? %>
+            myPlacemark = new ymaps.Placemark([<%= wo.latitude %>, <%= wo.longtitude %>], {
+                content: '<%= wo.fulladdr %>',
+                iconContent: '<%= wo.complete %>',
+                balloonContent: '<a href=/workobjects/<%= wo.id %>><%= wo.fulladdr %></a><br>Сотрудников на объекте:<%= Staffobjectjournal.where(["workobject_id=? and sdate<? and edate>? And status='worked'",7,Time.now,Time.now]).count %>'
+            }, {preset: '<%= wo.complete.nil? ? "twirl#redIcon" : color_for_balon_hash[wo.complete]%>'});
+            
+            myMap.geoObjects.add(myPlacemark);
+            <% end %>
+          <% end %>
+     }
+    </script>
+<p><p>
+    <div id="map" style="width: 1000px; height: 700px"></div>

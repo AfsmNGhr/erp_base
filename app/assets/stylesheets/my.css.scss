@@ -1,0 +1,32 @@
+.mrow
+{
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 0px 0px 2px 2px;
+}
+
+.dot_line
+{
+ border-bottom: 1px dotted #ccc;
+}
+
+.bgcol_but
+{
+  background: #363018;
+}
+
+textarea {min-height:100px; margin:0px; padding:0px; resize:none; overflow:hidden;}
+
+th .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+th .asc {
+  background-image: url(/images/up_arrow.gif);
+}
+
+th .desc {
+  background-image: url(/images/down_arrow.gif);
+}

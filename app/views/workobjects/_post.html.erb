@@ -1,0 +1,34 @@
+<div class="row display">
+ <div class="small-3 columns">
+  <h4>Отчеты</h4>
+ </div>
+ <div class="small-2 columns">
+  <a href=/posts/new?workobject_id=<%= params[:id]%>&ref=/workobjects/<%=params[:id]%>>Добавить Отчет</a>
+ </div>
+ <div class="small-7 columns">
+  <a href=/uploads/new?workobject_id=<%= params[:id]%>&ref=/workobjects/<%=params[:id]%>>Добавить файл</a>
+ </div>
+</div>
+
+<table>
+  <tr><th>Дата</th><th>Текст</th><th>Файлы</th></tr>
+
+
+<% posts_join_upload_hash(@workobject.id).each do |dd,row|
+  %>
+  <tr>
+    <td width=10%><%= dd %></td>
+    <td>
+     <% row[0].each do |pp| %>
+       <%=pp[1]%><br><b> =<%= Staff.find(pp[2]).lname if Staff.exists?(pp[2]) %></b>
+     <% end %>
+    </td>
+    <td>
+      <% row[1].each do |up| %>
+        <img src=/paper-clip.png>
+        <a href=/uploads/<%=up[0]%>><%= up[1]%></a> <%= (up[2].to_i/1024).to_i %>Kb</br>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
+</table>
