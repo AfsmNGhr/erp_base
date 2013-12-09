@@ -1,5 +1,0 @@
-<map from=?avi? to=?video/x-msvideo?/>
-<map from=?ts? to=?video/mpeg?/>
-<map from=?divx? to=?video/mpeg?/>
-<map from=?mp4? to=?video/MP4V-ES?/>
-<map from=?mkv? to=?video/x-msvideo?/>
