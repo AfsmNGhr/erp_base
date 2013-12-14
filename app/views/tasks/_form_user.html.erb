@@ -30,7 +30,7 @@
 </p>
 
 <p>
-  <b>Окончение:</b>
+  <b>Окончание:</b>
   <%= @task.edate %>
 </p>
 
@@ -44,6 +44,10 @@
       <b>Статус:</b><br>
       <%= f.select :state, task_status_hash.each.collect {|key,value| [value,key]}%>
     </div>
+  <div class="field">
+    <b>Приоритет:</b><br>
+    <%= f.select :priority, task_priority_hash.each.collect {|key,value| [value,key]}%>
+  </div>
     <div class="actions">
       <%= f.submit %>
     </div>

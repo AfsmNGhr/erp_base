@@ -42,3 +42,7 @@ gem 'jquery-rails'
 
 #gem "rmagick"
 #gem 'carrierwave'
+
+gem 'devise'
+gem 'rolify'
+gem 'cancan'

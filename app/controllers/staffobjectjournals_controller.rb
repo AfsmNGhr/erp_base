@@ -1,5 +1,5 @@
 class StaffobjectjournalsController < ApplicationController
-  before_filter :authorize, :except => [:index, :show]
+  #before_filter :authorize, :except => [:index, :show]
   # GET /staffobjectjournals
   # GET /staffobjectjournals.json
   def index

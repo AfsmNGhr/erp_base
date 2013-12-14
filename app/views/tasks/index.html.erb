@@ -3,4 +3,4 @@
     <div id="error_explanation"><h2><%= flash[:error] %></h2></div>
 <% end %>
 
-<%= render admin? || @staff_login.position =~ /уководитель|иректор/  ? 'index_admin' : 'index_user' %>
+<%= render 'index_admin' %>

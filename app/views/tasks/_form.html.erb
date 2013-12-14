@@ -54,6 +54,11 @@ $('task_description').keyup(function(){
       <%= f.select :state, task_status_hash.each.collect {|key,value| [value,key]}%>
     </div>
     <div class="actions">
+      <div class="field">
+        <b>Приоритет:</b><br>
+        <%= f.select :priority, task_priority_hash.each.collect {|key,value| [value,key]}%>
+      </div>
+      <div class="actions">
       <%= f.submit %>
     </div>
 <% end %>

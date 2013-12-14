@@ -36,6 +36,10 @@
   <%= task_status_hash[@task.state] %>
 </p>
 
+  <p>
+    <b>Приоритет:</b>
+    <%= task_priority_hash[@task.priority] %>
+  </p>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |
 <%= link_to 'Back', tasks_path %>

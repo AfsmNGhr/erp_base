@@ -9,6 +9,7 @@
     <th>Окончание</th>
     <th>% Выполнения</th>
     <th>Статус</th>
+    <th>Приоритет</th>
   </tr>
 
 <% Task.where(staff_id: @staff_login.id).each do |task| %>
@@ -20,6 +21,7 @@
     <td><%= task.edate %></td>
     <td><%= task.progress %></td>
     <td><%= task_status_hash[task.state] %></td>
+    <td><%= task_priority_hash[task.priority] %></td>
   </tr>
 <% end %>
 </table>

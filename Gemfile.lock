@@ -29,7 +29,11 @@ GEM
       i18n (= 0.6.1)
       multi_json (~> 1.0)
     arel (3.0.2)
+    atomic (1.1.14)
+    bcrypt-ruby (3.1.2)
+    bcrypt-ruby (3.1.2-x86-mingw32)
     builder (3.0.4)
+    cancan (1.6.10)
     chunky_png (1.2.8)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -44,6 +48,12 @@ GEM
       sass (~> 3.1)
     compass-rails (1.0.3)
       compass (>= 0.12.2, < 0.14)
+    devise (3.2.2)
+      bcrypt-ruby (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 3.2.6, < 5)
+      thread_safe (~> 0.1)
+      warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.0.0)
     fssm (0.2.10)
@@ -61,6 +71,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.24)
     multi_json (1.7.9)
+    orm_adapter (0.5.0)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -84,6 +95,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.14.6, < 2.0)
     rake (10.1.0)
+    rolify (3.2.0)
     sass (3.2.10)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -95,7 +107,10 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.8)
+    sqlite3 (1.3.8-x86-mingw32)
     thor (0.18.1)
+    thread_safe (0.1.3)
+      atomic
     tilt (1.4.1)
     treetop (1.4.15)
       polyglot
@@ -104,19 +119,25 @@ GEM
     uglifier (2.2.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    warden (1.2.3)
+      rack (>= 1.0)
     zurb-foundation (4.0.9)
       sass (>= 3.2.0)
 
 PLATFORMS
   ruby
+  x86-mingw32
 
 DEPENDENCIES
+  cancan
   coffee-rails (~> 3.2.1)
   compass-rails
+  devise
   jbuilder
   jquery-rails
   multi_json
   rails (= 3.2.13)
+  rolify
   sass-rails (~> 3.2.3)
   sqlite3
   uglifier (>= 1.0.3)
