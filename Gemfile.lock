@@ -33,6 +33,7 @@ GEM
     bcrypt-ruby (3.1.2)
     bcrypt-ruby (3.1.2-x86-mingw32)
     builder (3.0.4)
+    cancan (1.6.10)
     chunky_png (1.2.8)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -94,6 +95,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.14.6, < 2.0)
     rake (10.1.0)
+    rolify (3.2.0)
     sass (3.2.10)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -127,6 +129,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  cancan
   coffee-rails (~> 3.2.1)
   compass-rails
   devise
@@ -134,6 +137,7 @@ DEPENDENCIES
   jquery-rails
   multi_json
   rails (= 3.2.13)
+  rolify
   sass-rails (~> 3.2.3)
   sqlite3
   uglifier (>= 1.0.3)

@@ -44,3 +44,5 @@ gem 'jquery-rails'
 #gem 'carrierwave'
 
 gem 'devise'
+gem 'rolify'
+gem 'cancan'
