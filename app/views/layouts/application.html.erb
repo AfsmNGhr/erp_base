@@ -24,6 +24,7 @@
   </head>
 
   <body>
+
 <nav class="top-bar">
   <section class="top-bar-section">
     <ul class="left">
@@ -41,13 +42,22 @@
       <li><a href="/paymentcashes" style="<%= "background: #363018;" if request.fullpath=~/^\/payment/%>">Выплаты</a></li>
     </ul>
   </section>
+  <div class="user_nav">
+    <% if current_user %>
+        <%= link_to "Профиль", edit_user_registration_path(:current) %> |
+        <%= link_to "Выйти",  destroy_user_session_path %>
+    <% else %>
+        <%= link_to "Регистрация",  new_user_registration_path %> |
+        <%= link_to "Войти",  user_session_path %>
+    <% end %>
+  </div>
 </nav>
 <div class="row">
   <div class="twelve columns centered">
     <%= yield %>
   <div>
 </div>
-    
+
     <%= javascript_include_tag "application" %>
   </body>
 </html>
