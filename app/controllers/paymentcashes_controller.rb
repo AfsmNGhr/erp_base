@@ -1,5 +1,4 @@
 class PaymentcashesController < ApplicationController
-  load_and_authorize_resource
   # GET /paymentcashes
   # GET /paymentcashes.json
   def index

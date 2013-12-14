@@ -122,6 +122,7 @@ ActiveRecord::Schema.define(:version => 20131214144516) do
     t.datetime "updated_at",    :null => false
     t.string   "state"
     t.integer  "staff"
+    t.integer  "task_id"
   end
 
   create_table "users", :force => true do |t|
