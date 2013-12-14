@@ -1,5 +1,5 @@
 class WorkobjectsController < ApplicationController
-  before_filter :authorize, :except => [:index, :show]
+  #before_filter :authorize, :except => [:index, :show]
   include TasksHelper
   helper_method :sort_column, :sort_direction
 

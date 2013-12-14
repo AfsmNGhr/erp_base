@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
-  before_filter :authorize, :only => [:destroy]
+  #before_filter :authorize, :only => [:destroy]
   include WorkobjectsHelper
   include TasksHelper
   helper_method :sort_column, :sort_direction
