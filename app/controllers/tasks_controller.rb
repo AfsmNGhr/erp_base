@@ -1,9 +1,11 @@
 class TasksController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
-  load_and_authorize_resource :only => [:destroy]
+  #load_and_authorize_resource :only => [:destroy]
   include WorkobjectsHelper
   include TasksHelper
+  include Sms::SendSmsHelper
   helper_method :sort_column, :sort_direction
+
 
   # GET /tasks
   # GET /tasks.json
@@ -37,6 +39,7 @@ class TasksController < ApplicationController
   # GET /tasks/new.json
   def new
     @task = Task.new
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @task }
@@ -52,18 +55,18 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(params[:task])
-    @task.staff_from_id = @staff_login.id
+    @task.staff_from_id = current_staff.id
     @task.state = "new"
 
     respond_to do |format|
       if @task.save
         task_delegate = TaskDelegate.new
-        task_delegate.staff_from = @staff_login.id
+        task_delegate.staff_from = current_staff.id
         task_delegate.staff_to = params[:task]["staff_id"]
         task_delegate.task_id = @task.id
         task_delegate.when = Time.now
         if task_delegate.save
-          Mailer.task_notification(Staff.find(params[:task]["staff_id"]),Staff.find(@staff_login.id),@task).deliver
+          Mailer.task_notification(Staff.find(params[:task]["staff_id"]),Staff.find(current_staff.id),@task).deliver
           sms_state = send_sms(Staff.find(task_delegate.staff_to),Staff.find(task_delegate.staff_from),@task.id) =~ /100/ ? "SMS send Ok" : "SMS not send"
           format.html { redirect_to @task, notice: 'Task was successfully created.<br>'+sms_state }
           format.json { render json: @task, status: :created, location: @task }
@@ -82,7 +85,7 @@ class TasksController < ApplicationController
   # PUT /tasks/1.json
   def update
     @task = Task.find(params[:id])
-    @task.staff_from_id = @staff_login.id
+    @task.staff_from_id = current_staff.id
     old_staff_id = @task.staff_id.nil? ? 0 : @task.staff_id
 logger.debug "===== #{@task.staff_id.inspect} ====="
 logger.debug "===== #{params[:task]["staff_id"].inspect} ====="
@@ -90,7 +93,7 @@ logger.debug "===== #{params[:task]["staff_id"].inspect} ====="
       if @task.update_attributes(params[:task])
         if !params[:task]["staff_id"].nil? && old_staff_id.to_i != params[:task]["staff_id"].to_i
           task_delegate = TaskDelegate.new
-          task_delegate.staff_from = @staff_login.id
+          task_delegate.staff_from = current_staff.id
           task_delegate.staff_to = params[:task]["staff_id"]
           task_delegate.task_id = @task.id
           task_delegate.when = Time.now
@@ -118,8 +121,6 @@ logger.debug "===== #{params[:task]["staff_id"].inspect} ====="
   # DELETE /tasks/1.json
   def destroy
     @task = Task.find(params[:id])
-
-    if admin? 
       @task.destroy
       respond_to do |format|
         format.html { redirect_to tasks_url }
@@ -130,8 +131,8 @@ logger.debug "===== #{params[:task]["staff_id"].inspect} ====="
 
   private
     def record_not_found
-#      write_attribute(:description," ")
-#      write_attribute(:workobject_id,0)
+      write_attribute(:description," ")
+      write_attribute(:workobject_id,0)
     end
   def sort_column
     Task.column_names.include?(params[:sort]) ? params[:sort] : "sdate"
@@ -140,4 +141,4 @@ logger.debug "===== #{params[:task]["staff_id"].inspect} ====="
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
-end
+

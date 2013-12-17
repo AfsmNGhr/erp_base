@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131214144516) do
+ActiveRecord::Schema.define(:version => 20131217074515) do
 
   create_table "data_files", :force => true do |t|
     t.string   "DataFile"
@@ -44,17 +44,6 @@ ActiveRecord::Schema.define(:version => 20131214144516) do
     t.string   "image"
   end
 
-  create_table "roles", :force => true do |t|
-    t.string   "name"
-    t.integer  "resource_id"
-    t.string   "resource_type"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
-  add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
-  add_index "roles", ["name"], :name => "index_roles_on_name"
-
   create_table "staff_task_journals", :force => true do |t|
     t.integer  "staff_id"
     t.integer  "task_id"
@@ -82,14 +71,25 @@ ActiveRecord::Schema.define(:version => 20131214144516) do
     t.date     "birthday"
     t.string   "passport"
     t.string   "skill"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.string   "login"
-    t.string   "password"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "email"
     t.string   "phone1"
     t.string   "phone2"
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0,  :null => false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "login"
   end
+
+  add_index "staffs", ["login"], :name => "index_staffs_on_login", :unique => true
+  add_index "staffs", ["reset_password_token"], :name => "index_staffs_on_reset_password_token", :unique => true
 
   create_table "task_delegates", :force => true do |t|
     t.integer  "task_id"
@@ -124,32 +124,6 @@ ActiveRecord::Schema.define(:version => 20131214144516) do
     t.integer  "staff"
     t.integer  "task_id"
   end
-
-  create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0,  :null => false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
-    t.string   "name"
-  end
-
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-
-  create_table "users_roles", :id => false, :force => true do |t|
-    t.integer "user_id"
-    t.integer "role_id"
-  end
-
-  add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
 
   create_table "workobjects", :force => true do |t|
     t.string   "name"

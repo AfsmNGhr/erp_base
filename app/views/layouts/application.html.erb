@@ -43,12 +43,12 @@
     </ul>
   </section>
   <div class="user_nav">
-    <% if current_user %>
-        <%= link_to "Профиль", edit_user_registration_path(:current) %> |
-        <%= link_to "Выйти",  destroy_user_session_path %>
+    <% if current_staff %>
+        <%= link_to "Профиль", edit_staff_registration_path %> |
+        <%= link_to "Выйти",  destroy_staff_session_path %>
     <% else %>
-        <%= link_to "Регистрация",  new_user_registration_path %> |
-        <%= link_to "Войти",  user_session_path %>
+        <%= link_to "Регистрация",  new_staff_registration_path %> |
+        <%= link_to "Войти",  staff_session_path %>
     <% end %>
   </div>
 </nav>

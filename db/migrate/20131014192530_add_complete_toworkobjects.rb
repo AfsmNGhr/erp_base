@@ -1,6 +1,6 @@
 class AddCompleteToworkobjects < ActiveRecord::Migration
   def change
-    add_column :workobjects, :complete, :integer
+    add_column :workobjects, :complete, :integer, :null => false
   end
 
 end

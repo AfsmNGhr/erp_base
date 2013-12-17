@@ -1,5 +1,5 @@
 class WorkobjectsController < ApplicationController
-  load_and_authorize_resource :except => [:index, :show]
+  #load_and_authorize_resource :except => [:index, :show]
   include TasksHelper
   helper_method :sort_column, :sort_direction
 

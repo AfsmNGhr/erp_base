@@ -2,11 +2,11 @@ class Task < ActiveRecord::Base
   after_initialize :default_values
   has_many :staff_task_journals, dependent: :destroy
   has_many :posts, dependent: :destroy
+  belongs_to :staff
   attr_accessible :workobject_id, :description, :edate, :progress, :sdate, :state, :staff_id, :staff_from_id, :priority
   validates :description, presence: true
   validates :staff_id, presence: true
   validates :staff_from_id, presence: true
-
 
  
   def fullname
