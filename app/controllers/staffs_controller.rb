@@ -1,6 +1,6 @@
 class StaffsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
-  #load_and_authorize_resource :except => [:index, :show]
+  before_filter :authorize, :except => [:index, :show]
 
   # GET /staffs
   # GET /staffs.json

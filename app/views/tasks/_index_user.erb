@@ -12,7 +12,7 @@
     <th>Приоритет</th>
   </tr>
 
-<% Task.where(staff_id: @staff_login.id).each do |task| %>
+<% Task.where(staff_id: @current_staff_id).each do |task| %>
   <tr>
     <td><%= link_to task.description, task %></td>
     <td><%= link_to Workobject.find(task.workobject_id).fulladdr, workobject_path(task.workobject_id) unless task.workobject_id.nil? %></td>

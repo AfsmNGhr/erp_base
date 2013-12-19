@@ -1,6 +1,6 @@
 class UploadsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
-  #load_and_authorize_resource :except => [:index, :show, :new, :createa, :upload]
+  before_filter :authorize, :except => [:index, :show, :new, :createa, :upload]
 
   # GET /uploads
   # GET /uploads.json

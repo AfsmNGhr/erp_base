@@ -9,11 +9,4 @@ module ApplicationHelper
     Hash['current','Текущая','burn','Горящая']
   end
 
-  def current_user
-    @current_user = @current_staff
-  end
-
-  def role
-    self.roles.find_by_name(role.to_s)
-  end
 end

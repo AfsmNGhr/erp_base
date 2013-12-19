@@ -7,7 +7,7 @@ class Staff < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :password, :password_confirmation, :remember_me,
                   :birthday, :fname, :lname, :mname, :passport, :position,
-                  :skill, :login, :email, :phone1, :phone2, :role
+                  :skill, :login, :email, :phone1, :phone2, :admin
 #  validates :birthday, presence: true
   validates :fname, presence: true
   validates :lname, presence: true
@@ -21,8 +21,10 @@ class Staff < ActiveRecord::Base
 
   def fullname
      res=read_attribute(:lname)+" "+read_attribute(:fname)+" "+read_attribute(:mname)
-     res+=" "+read_attribute(:position) unless read_attribute(:position).nil?
+     res+=", "+read_attribute(:position) unless read_attribute(:position).nil?
      res
   end
 end
+
+
 

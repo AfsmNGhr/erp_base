@@ -1,10 +1,11 @@
 class TasksController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
-  #load_and_authorize_resource :only => [:destroy]
+  before_filter :authorize, :only => [:destroy]
   include WorkobjectsHelper
   include TasksHelper
   include Sms::SendSmsHelper
   helper_method :sort_column, :sort_direction
+
 
 
   # GET /tasks
@@ -66,7 +67,7 @@ class TasksController < ApplicationController
         task_delegate.task_id = @task.id
         task_delegate.when = Time.now
         if task_delegate.save
-          Mailer.task_notification(Staff.find(params[:task]["staff_id"]),Staff.find(current_staff.id),@task).deliver
+          #Mailer.task_notification(Staff.find(params[:task]["staff_id"]),Staff.find(current_staff.id),@task).deliver
           sms_state = send_sms(Staff.find(task_delegate.staff_to),Staff.find(task_delegate.staff_from),@task.id) =~ /100/ ? "SMS send Ok" : "SMS not send"
           format.html { redirect_to @task, notice: 'Task was successfully created.<br>'+sms_state }
           format.json { render json: @task, status: :created, location: @task }
@@ -121,7 +122,9 @@ logger.debug "===== #{params[:task]["staff_id"].inspect} ====="
   # DELETE /tasks/1.json
   def destroy
     @task = Task.find(params[:id])
+    if current_staff.admin?
       @task.destroy
+      end
       respond_to do |format|
         format.html { redirect_to tasks_url }
         format.json { head :no_content }
@@ -131,8 +134,8 @@ logger.debug "===== #{params[:task]["staff_id"].inspect} ====="
 
   private
     def record_not_found
-      write_attribute(:description," ")
-      write_attribute(:workobject_id,0)
+     write_attribute(:description," ")
+     write_attribute(:workobject_id,0)
     end
   def sort_column
     Task.column_names.include?(params[:sort]) ? params[:sort] : "sdate"

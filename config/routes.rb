@@ -1,6 +1,5 @@
 Foundation::Application.routes.draw do
 
-
   devise_for :staffs
 
   resources :paymentcashes

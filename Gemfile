@@ -44,4 +44,3 @@ gem 'jquery-rails'
 #gem 'carrierwave'
 
 gem 'devise'
-

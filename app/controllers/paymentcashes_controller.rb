@@ -1,4 +1,5 @@
 class PaymentcashesController < ApplicationController
+  before_filter :authorize
   # GET /paymentcashes
   # GET /paymentcashes.json
   def index
