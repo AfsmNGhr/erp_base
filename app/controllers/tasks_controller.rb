@@ -11,7 +11,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.order(sort_column + " " + sort_direction)
+    @tasks = Task.joins("left join staffs ss1 on ss1.id=tasks.staff_id").joins("left join staffs ss2 on ss2.id=tasks.staff_from_id").select("tasks.id,tasks.description,tasks.workobject_id,ss2.lname || ' ' || ss2.fname from_name,ss1.lname || ' ' || ss1.fname to_name,tasks.sdate,tasks.edate,tasks.progress,tasks.state,tasks.priority").order(sort_column + " " + sort_direction)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -138,7 +138,7 @@ logger.debug "===== #{params[:task]["staff_id"].inspect} ====="
      write_attribute(:workobject_id,0)
     end
   def sort_column
-    Task.column_names.include?(params[:sort]) ? params[:sort] : "sdate"
+    ["description","workobject_id","from_name","to_name","sdate","edate","progress","state","priority"].include?(params[:sort]) ? params[:sort] : "sdate"
   end
   
   def sort_direction

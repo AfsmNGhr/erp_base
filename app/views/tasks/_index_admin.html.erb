@@ -12,8 +12,8 @@
   <tr>
     <th><%= sortable "description", "Описание" %></th>
     <th><%= sortable "workobject_id", "Объект" %></th>
-    <th><%= sortable "staff_from_id", "Автор" %></th>
-    <th><%= sortable "staff_id", "Исполнитель" %></th>
+    <th><%= sortable "from_name", "Автор" %></th>
+    <th><%= sortable "to_name", "Исполнитель" %></th>
     <th><%= sortable "sdate", "Начало" %></th>
     <th><%= sortable "edate", "Окончание" %></th>
     <th><%= sortable "progress", "% Выполнения" %></th>
@@ -27,8 +27,8 @@
   <tr>
     <td><%= link_to task.description, task %></td>
     <td><%= link_to Workobject.find(task.workobject_id).fulladdr, workobject_path(task.workobject_id) unless task.workobject_id.nil? %></td>
-    <td><%= Staff.find(task.staff_from_id).fullname unless task.staff_from_id.nil? %></td>
-    <td><%= Staff.find(task.staff_id).fullname unless task.staff_id.nil? %></td>
+    <td><%= task.from_name %></td>
+    <td><%= task.to_name %></td>
     <td width=6%><%= task.sdate %></td>
     <td width=6%><%= task.edate %></td>
     <td><%= task.progress %></td>
