@@ -1,4 +1,12 @@
-<h1>Список выплат</h1>
+<div class="row display">
+ <div class="small-3 columns">
+  <h4>Список выплат</h4>
+ </div>
+ <div class="small-2 small-offset-7 columns">
+  <%= link_to 'Новая выплата', new_paymentcash_path, class: "button radius"  %>
+ </div>
+</div>
+
 
 
 
@@ -9,7 +17,6 @@
     <th>Сколько</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @paymentcashes.each do |paymentcash| %>
@@ -18,12 +25,11 @@
     <td><%= Staff.find(paymentcash.staff_id).fullname %></td>
     <td><%= paymentcash.how_many %></td>
     <td><%= link_to 'Show', paymentcash %></td>
-    <td><%= link_to 'Edit', edit_paymentcash_path(paymentcash) %></td>
-    <td><%= link_to 'Destroy', paymentcash, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to tag("img", { :src => "/images/button_edit.gif", :title =>'Edit', :alt=>'Edit',:border=>0,:size=>"17x17"}, false) , edit_paymentcash_path(paymentcash) %>
+      <%= link_to tag("img", { :src => "/images/button_drop.gif", :title =>'Destroy', :alt=>'Destroy',:border=>0}, false), paymentcash, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'Новая выплата', new_paymentcash_path %>

@@ -1,6 +1,26 @@
-
 <% if flash[:error] %>
     <div id="error_explanation"><h2><%= flash[:error] %></h2></div>
 <% end %>
-
+<div class="row display">
+  <div class="small-3 columns">
+    <h4>Список задач</h4>
+  </div>
+  <div class="small-3 columns">
+    <%= form_tag tasks_path, :method => 'get' do %>
+        <%= hidden_field_tag :direction, params[:direction] %>
+        <%= hidden_field_tag :sort, params[:sort] %>
+        <input name="search" size="20" type="text" value=<%=params[:search]%>>
+        </div>
+        <div class="small-3 columns">
+          <%= submit_tag "Найти", :name => nil %>
+    <% end %>
+    </div>
+    <div class="small-3 columns">
+      <%= link_to 'Добавить задачу', new_task_path, class: "button radius" %>
+    </div>
+    </div>
+<% if current_staff.admin? %>
 <%= render 'index_admin' %>
+<% else %>
+<%= render 'index_user' %>
+<% end %>

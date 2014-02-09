@@ -29,40 +29,38 @@
 
 <div id=addpost style="display:none">
 
-<form accept-charset="UTF-8" action="/posts" class="new_post" id="new_post" method="post"><input name="utf8" type="hidden" value="&#x2713;" />
- 
+<%= form_for(@post) do |f| %>
   <div class="field">
     <b>Текст</b>
-    <textarea cols="40" id="post_text" name="post[text]" rows="20">
-    </textarea>
+    <%= f.text_area :text, cols: 40, rows: 20%>
   </div>
   <div class="actions">
-    <input name="commit" type="submit" value="Добавить" />
+    <%= f.submit "Добавить" %>
   </div> 
   <div>
    <a href=# onclick="addpost.style.display='none'" class=slist ><b>Отмена</b></a>
   </div>
-  <input type=hidden name=ref value=/tasks/<%=params[:id]%>>
-  <input type=hidden name="post[task_id]" value=<%=params[:id]%>>
- </form>
+  <%= hidden_field_tag :ref, "/tasks/#{params[:id]}" %>
+  <%= f.hidden_field :task_id, :value=> params[:id]%>
+ <% end %>
 </div>
 
 <div id=addfile  style="display:none">
-<form accept-charset="UTF-8" action="/uploads/upload" enctype="multipart/form-data" method="post"><input name="utf8" type="hidden" value="&#x2713;" />
+<%= form_for(@upload) do |f| %>
 
   <div class="field">
     <b>Выберите файл</b><br />
-    <input id="filename" name="filename" type="file" />
+    <%= f.file_field :filename %>
   </div>
   <div class="actions">
-    <input name="commit" type="submit" value="Upload" />
+    <%= f.submit "Upload" %>
   </div>
   <div>
    <a href=# onclick="addfile.style.display='none'" class=slist ><b>Отмена</b></a>
   </div>
-  <input type=hidden name=ref value=/tasks/<%=params[:id]%>>
-  <input type=hidden name="uploads[task_id]" value=<%=params[:id]%>>
- </form>
+  <%= hidden_field_tag :ref, "/tasks/#{params[:id]}" %>
+  <%= f.hidden_field :task_id, :value=>params[:id]%>
+ <% end %>
 </div>
 
 <a href=# onclick="addpost.style.display='';addfile.style.display='none';"  class="button radius">Добавить комментарий</a>

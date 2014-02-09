@@ -58,6 +58,10 @@
       <%= f.radio_button :complete, st %><font style="background-color:<%=color_for_fontbg_hash[st]%>"><%=st%></font>
     <% end %>  
   </div>
+  <div class="field">
+    <%= f.label "Тип объекта" %>
+    <%= f.select :type_wo, workobject_type_array %>
+  </div>
 </fieldset>
   <div class="actions">
     <%= f.submit %>

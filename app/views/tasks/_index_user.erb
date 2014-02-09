@@ -1,27 +1,24 @@
-<h1>Список задач</h1>
-
 <table>
   <tr>
-    <th>Описание</th>
-    <th>Объект</th>
-    <th>Автор</th>
-    <th>Начало</th>
-    <th>Окончание</th>
-    <th>% Выполнения</th>
-    <th>Статус</th>
-    <th>Приоритет</th>
+    <th width=30%><%= sortable "description", "Описание", params[:search] %></th>
+    <th width=30%><%= sortable "wo_fullname", "Объект", params[:search] %></th>
+    <th width=15%><%= sortable "from_name", "Автор", params[:search] %></th>
+    <th width=7%><%= sortable "sdate", "Начало", params[:search] %></th>
+    <th width=7%><%= sortable "edate", "Окончание", params[:search] %></th>
+    <th width=6%><%= sortable "progress", "% Выполнения", params[:search] %></th>
+    <th width=5%><%= sortable "state", "Статус", params[:search] %></th>
   </tr>
 
-<% Task.where(staff_id: @current_staff_id).each do |task| %>
-  <tr>
-    <td><%= link_to task.description, task %></td>
-    <td><%= link_to Workobject.find(task.workobject_id).fulladdr, workobject_path(task.workobject_id) unless task.workobject_id.nil? %></td>
-    <td><%= Staff.find(task.staff_from_id).fullname unless task.staff_from_id.nil? %></td>
-    <td><%= task.sdate %></td>
-    <td><%= task.edate %></td>
-    <td><%= task.progress %></td>
-    <td><%= task_status_hash[task.state] %></td>
-    <td><%= task_priority_hash[task.priority] %></td>
-  </tr>
-<% end %>
+  <% @tasks.each do |task| %>
+      <tr>
+        <td width=28%><%= tag("img", { :src => "/images/warning.png", :title =>'Горящая', :alt=>'Горящая',:border=>0}, false) if task.priority=="burn" %>
+          <%= link_to task.description[0..40]+"...", task,class: task.state[1..-1] %></td>
+        <td width=28%><%= link_to task.wo_fulladdr[0..40]+"...", workobject_path(task.wo_id), class: task.state[1..-1] unless task.wo_id.nil? %></td>
+        <td width=15% class=<%=task.state[1..-1]%>><%= task.from_name %></td>
+        <td width=9% class=<%=task.state[1..-1]%>><%= task.sdate %></td>
+        <td width=9% class=<%=task.state[1..-1]%>><%= task.edate %></td>
+        <td width=6% class=<%=task.state[1..-1]%>><%= task.progress %></td>
+        <td width=5% class=<%=task.state[1..-1]%>><%= task_status_hash[task.state] %></td>
+      </tr>
+  <% end %>
 </table>

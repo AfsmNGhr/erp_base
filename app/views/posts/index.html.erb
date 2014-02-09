@@ -1,4 +1,12 @@
-<h1>Listing posts</h1>
+<div class="row display">
+ <div class="small-3 columns">
+  <h4>Список отчётов</h4>
+ </div>
+ <div class="small-2 small-offset-7 columns">
+  <%= link_to 'Новый отчёт', new_post_path, class: "button radius"  %>
+ </div>
+</div>
+
 
 <table>
   <tr>
@@ -7,24 +15,20 @@
     <th>Task</th>
     <th>WorkObject</th>
     <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% rr = params[:task_id].nil? ? @posts : Post.where(task_id: params[:task_id])
    rr.each do |post| %>
   <tr>
-    <td><%= post.text %></td>
+    <td><%= link_to post.text[0..40]+"...", post %></td>
     <td><%= post.staff.fullname %></td>
-    <td><%= post.task.description unless post.task.nil? %></td>
-    <td><%= post.workobject.fulladdr unless post.workobject.nil? %></td>
-    <td><%= link_to 'Show', post %></td>
-    <td><%= link_to 'Edit', edit_post_path(post) %></td>
-    <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= post.task.description[0..40]+"..." unless post.task.nil? %></td>
+    <td><%= post.workobject.fulladdr[0..40]+"..." unless post.workobject.nil? %></td>
+    <td><%= link_to tag("img", { :src => "/images/button_edit.gif", :title =>'Edit', :alt=>'Edit',:border=>0,:size=>"17x17"}, false) , edit_post_path(post) %>
+      <%= link_to tag("img", { :src => "/images/button_drop.gif", :title =>'Destroy', :alt=>'Destroy',:border=>0}, false), post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Post', new_post_path %>

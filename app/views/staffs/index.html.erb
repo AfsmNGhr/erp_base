@@ -1,6 +1,6 @@
 <div class="row display">
  <div class="small-5 columns">
-  <h1>Список сотрудников</h1>
+  <h4>Список сотрудников</h4>
  </div>
  <div class="small-2 small-offset-5 columns">
   <%= link_to 'Добавить сотрудника', new_staff_path, class: "button radius"  %>
@@ -16,9 +16,6 @@
     <th>ФИО</th>
     <th>Должность</th>
     <th>Дата рождения</th>
-    <th>Паспорт</th>
-    <th></th>
-    <th></th>
     <th></th>
   </tr>
 
@@ -27,9 +24,9 @@
     <td><%= link_to staff.lname+" "+staff.fname+" "+staff.mname, staff %></td>
     <td><%= staff.position %></td>
     <td><%= staff.birthday %></td>
-    <td><%= staff.passport %></td>
-    <td><%= link_to 'Edit', edit_staff_path(staff) %></td>
-    <td><%= link_to 'Destroy', staff, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to tag("img", { :src => "/images/button_edit.gif", :title =>'Edit', :alt=>'Edit',:border=>0,:size=>"17x17"}, false) , edit_staff_path(staff) %>
+      <%= link_to tag("img", { :src => "/images/button_drop.gif", :title =>'Destroy', :alt=>'Destroy',:border=>0}, false), staff, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
   </tr>
 <% end %>
 </table>

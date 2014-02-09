@@ -22,4 +22,8 @@ module WorkobjectsHelper
   def workobject_status_hash
     { "dogovor" => "Договор", "run" => "Реализация", "close" => "Закрытие" }
   end
+  
+  def workobject_type_array
+   [["Объект заказчика","Объект заказчика"],["Офис","Офис"]]
+  end
 end

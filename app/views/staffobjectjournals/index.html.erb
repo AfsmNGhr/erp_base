@@ -1,4 +1,12 @@
-<h1>Журнал планирования работ сотрудников</h1>
+<div class="row display">
+ <div class="small-5 columns">
+  <h4>Журнал планирования работ сотрудников</h4>
+ </div>
+ <div class="small-2 small-offset-5 columns">
+  <%= link_to 'Новая запись', new_staffobjectjournal_path, class: "button radius"  %>
+ </div>
+</div>
+
 
 <% if flash[:error] %>
     <div id="error_explanation"><h2><%= flash[:error] %></h2></div>
@@ -13,7 +21,6 @@
     <th>Статус</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @staffobjectjournals.each do |staffobjectjournal| %>
@@ -24,12 +31,12 @@
     <td><%= staffobjectjournal.edate %></td>
     <td><%= staff_obj_status_hash[staffobjectjournal.status] %></td>
     <td><%= link_to 'Show', staffobjectjournal %></td>
-    <td><%= link_to 'Edit', edit_staffobjectjournal_path(staffobjectjournal) %></td>
-    <td><%= link_to 'Destroy', staffobjectjournal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td width=5%><%= link_to tag("img", { :src => "/images/button_edit.gif", :title =>'Edit', :alt=>'Edit',:border=>0,:size=>"17x17"}, false) , edit_staffobjectjournal_path(staffobjectjournal) %>
+          <%= link_to tag("img", { :src => "/images/button_drop.gif", :title =>'Destroy', :alt=>'Destroy',:border=>0}, false), staffobjectjournal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'Новая запись', new_staffobjectjournal_path, class: "button radius" %>
+

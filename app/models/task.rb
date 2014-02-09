@@ -18,4 +18,12 @@ class Task < ActiveRecord::Base
   def default_values
     self.state = "new" if self.state.nil? || self.state.empty?
   end
+
+  def self.search(search)
+    if search
+     where('description LIKE ? OR sdate LIKE ? OR edate LIKE ? OR wo_fulladdr LIKE ? OR from_name LIKE ? OR to_name LIKE ?', "%#{search}%","%#{search}%","%#{search}%","%#{search}%","%#{search}%","%#{search}%")
+      else
+     scoped
+    end
+   end
 end

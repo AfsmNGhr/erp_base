@@ -1,8 +1,10 @@
 Foundation::Application.routes.draw do
 
-  devise_for :staffs
+  devise_for :staffs, :except => :create
 
-  resources :paymentcashes
+  resources :staffs
+
+  resources :finances
 
 
   resources :staffobjectjournals
@@ -15,17 +17,15 @@ Foundation::Application.routes.draw do
     collection { post :upload }
   end
 
-  resources :uploads do
-    collection { post :upload }
-  end
+  resources :uploads
+#   do
+#    collection { post :upload }
+#  end
 
   resources :staff_task_journals
 
 
   resources :tasks
-
-
-  resources :staffs
 
 
   resources :workobjects

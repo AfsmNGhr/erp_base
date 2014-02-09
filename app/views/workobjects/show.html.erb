@@ -1,6 +1,7 @@
 <div class="row display">
  <div class="small-6 large-6 columns">
-   <p id="notice"><%= notice %></p>
+   <fieldset>
+    <legend><h4>Объект</h4></legend>
    <p> <b>Название:</b> <%= @workobject.name %> </p>
    <p> <b>Город:</b> <%= @workobject.city %> </p>
    <p> <b>Адрес:</b> <%= @workobject.address %> </p>
@@ -11,6 +12,7 @@
    <p> <b>% завершения:</b> <%= @workobject.complete %> </p>
    <%= link_to 'Edit', edit_workobject_path(@workobject) %> |
    <%= link_to 'Back', workobjects_path %>
+   </fieldset>
  </div>
  <div class="small-6 large-6 columns">
   <%= render 'staff' %>

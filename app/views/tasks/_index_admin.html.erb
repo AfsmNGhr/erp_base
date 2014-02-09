@@ -1,41 +1,29 @@
-<div class="row display">
- <div class="small-3 columns">
-  <h1>Список задач</h1>
- </div>
- <div class="small-2 small-offset-7 columns">
-  <%= link_to 'Добавить задачу', new_task_path, class: "button radius"  %>
- </div>
-</div>
-
-
 <table>
   <tr>
-    <th><%= sortable "description", "Описание" %></th>
-    <th><%= sortable "workobject_id", "Объект" %></th>
-    <th><%= sortable "from_name", "Автор" %></th>
-    <th><%= sortable "to_name", "Исполнитель" %></th>
-    <th><%= sortable "sdate", "Начало" %></th>
-    <th><%= sortable "edate", "Окончание" %></th>
-    <th><%= sortable "progress", "% Выполнения" %></th>
-    <th><%= sortable "state", "Статус" %></th>
-    <th><%= sortable "priority", "Приоритет" %></th>
-    <th></th>
-    <th></th>
+    <th width=21%><%= sortable "description", "Описание", params[:search] %></th>
+    <th width=21%><%= sortable "wo_fullname", "Объект", params[:search] %></th>
+    <th width=15%><%= sortable "from_name", "Автор", params[:search] %></th>
+    <th width=15%><%= sortable "to_name", "Исполнитель", params[:search] %></th>
+    <th width=6%><%= sortable "sdate", "Начало", params[:search] %></th>
+    <th width=6%><%= sortable "edate", "Окончание", params[:search] %></th>
+    <th width=5%><%= sortable "progress", "% Выполнения", params[:search] %></th>
+    <th width=6%><%= sortable "state", "Статус", params[:search] %></th>
+    <th width=5%></th>
   </tr>
 
-<% @tasks.each do |task| %>
-  <tr>
-    <td><%= link_to task.description, task %></td>
-    <td><%= link_to Workobject.find(task.workobject_id).fulladdr, workobject_path(task.workobject_id) unless task.workobject_id.nil? %></td>
-    <td><%= task.from_name %></td>
-    <td><%= task.to_name %></td>
-    <td width=6%><%= task.sdate %></td>
-    <td width=6%><%= task.edate %></td>
-    <td><%= task.progress %></td>
-    <td><%= task_status_hash[task.state] %></td>
-    <td><%= task_priority_hash[task.priority] %></td>
-    <td><%= link_to 'Edit', edit_task_path(task) %></td>
-    <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+  <% @tasks.each do |task| %>
+      <tr>
+        <td width=21%><%= tag("img", { :src => "/images/warning.png", :title =>'Горящая', :alt=>'Горящая',:border=>0}, false) if task.priority=="burn" %>
+          <%= link_to task.description[0..40]+"...", task,class: task.state[1..-1] %></td>
+        <td width=21%><%= link_to @task_wo_fulladdr[0..40]+"...", workobject_path(@task_wo_id), class: task.state[1..-1] unless @task_wo_id.nil? %></td>
+        <td width=15% class=<%=task.state[1..-1]%>><%= task.from_name %></td>
+        <td width=15% class=<%=task.state[1..-1]%>><%= task.to_name %></td>
+        <td width=6% class=<%=task.state[1..-1]%>><%= task.sdate %></td>
+        <td width=6% class=<%=task.state[1..-1]%>><%= task.edate %></td>
+        <td width=5% class=<%=task.state[1..-1]%>><%= task.progress %></td>
+        <td width=6% class=<%=task.state[1..-1]%>><%= task_status_hash[task.state] %></td>
+        <td width=5%><%= link_to tag("img", { :src => "/images/button_edit.gif", :title =>'Edit', :alt=>'Edit',:border=>0,:size=>"17x17"}, false) , edit_task_path(task) %>
+          <%= link_to tag("img", { :src => "/images/button_drop.gif", :title =>'Destroy', :alt=>'Destroy',:border=>0}, false), task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
 </table>

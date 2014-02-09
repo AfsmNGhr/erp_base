@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Workobject:</b>
+  <%= @finance.workobject_id %>
+</p>
+
+<p>
+  <b>Staff:</b>
+  <%= @finance.staff_id %>
+</p>
+
+<p>
+  <b>Cost type:</b>
+  <%= @finance.cost_type %>
+</p>
+
+<p>
+  <b>Fin item:</b>
+  <%= @finance.fin_item %>
+</p>
+
+<p>
+  <b>Staff item:</b>
+  <%= @finance.staff_item %>
+</p>
+
+
+<%= link_to 'Edit', edit_finance_path(@finance) %> |
+<%= link_to 'Back', finances_path %>

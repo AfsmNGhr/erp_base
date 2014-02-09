@@ -62,9 +62,8 @@ class StaffsController < ApplicationController
   # PUT /staffs/1.json
   def update
     @staff = Staff.find(params[:id])
-
     respond_to do |format|
-      if @staff.update_attributes(params[:staff])
+      if @staff.update_without_password(params[:staff])
         format.html { redirect_to @staff, notice: 'Staff was successfully updated.' }
         format.json { head :no_content }
       else

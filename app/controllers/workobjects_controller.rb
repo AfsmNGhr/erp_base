@@ -6,7 +6,7 @@ class WorkobjectsController < ApplicationController
   # GET /workobjects
   # GET /workobjects.json
   def index
-    @workobjects = Workobject.order(sort_column + " " + sort_direction)
+    @workobjects = Workobject.joins("left join staffs ss1 on ss1.id=workobjects.staff_id").select("workobjects.id id,workobjects.address,workobjects.city,workobjects.name,workobjects.staff_id,ss1.lname lname,workobjects.region,workobjects.complete,workobjects.status").search(params[:search]).order(sort_column + " " + sort_direction)
 
     respond_to do |format|
       format.html # index.html.erb

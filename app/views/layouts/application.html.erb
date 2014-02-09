@@ -25,26 +25,30 @@
 <nav class="top-bar">
   <section class="top-bar-section">
     <ul class="left">
-      <li class="divider"></li>
+ <li class="divider"></li>
       <li><a href="/map" style="<%= "background: #363018;" if request.fullpath=~/^\/map/%>">Карта</a></li>
-      <li class="divider"></li>
+<li class="divider"></li>
+      <li><a href="/staffs" style="<%= "background: #363018;" if request.fullpath=~/^\/staffs/%>">Сотрудники</a></li>
+ <li class="divider"></li>
+      <li><a href="/tasks" style="<%= "background: #363018;" if request.fullpath=~/^\/tasks/%>">Задачи</a></li>
+<li class="divider"></li>
       <li><a href="/workobjects" style="<%= "background: #363018;" if request.fullpath=~/^\/workobjects/%>">Объекты</a></li>
       <li class="divider"></li>
-      <li><a href="/staffs" style="<%= "background: #363018;" if request.fullpath=~/^\/staffs/%>">Сотрудники</a></li>
-      <li class="divider"></li>
-      <li><a href="/tasks" style="<%= "background: #363018;" if request.fullpath=~/^\/tasks/%>">Задачи</a></li>
-      <li class="divider"></li>
       <li><a href="/staffobjectjournals" style="<%= "background: #363018;" if request.fullpath=~/^\/staffo/%>">Журнал</a></li>
+ <li class="divider"></li>
+      <li><a href="/uploads" style="<%= "background: #363018;" if request.fullpath=~/^\/uploads/%>">Документы</a></li>
       <li class="divider"></li>
-      <li><a href="/paymentcashes" style="<%= "background: #363018;" if request.fullpath=~/^\/payment/%>">Выплаты</a></li>
+<li><a href="/finances" style="<%= "background: #363018;" if request.fullpath=~/^\/finances/%>">Финансы</a></li>
+<li class="divider"></li>
+<li><a href="/posts" style="<%= "background: #363018;" if request.fullpath=~/^\/posts/%>">Отчеты</a></li>
+      <li class="divider"></li>
     </ul>
   </section>
   <div class="user_nav">
     <% if current_staff %>
-        <%= link_to current_staff.fullname, edit_staff_registration_path %>
+        <%= link_to current_staff.fullname %>
         <%= link_to "Выйти",  destroy_staff_session_path %>
     <% else %>
-        <%= link_to "Регистрация",  new_staff_registration_path %>
         <%= link_to "Войти",  staff_session_path %>
     <% end %>
   </div>

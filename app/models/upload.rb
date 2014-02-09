@@ -4,10 +4,9 @@ class Upload < ActiveRecord::Base
   attr_accessible :filename, :size, :workobject_id, :state, :staff, :task_id
 #  has_attached_file :upload
 
-  def rrr_upload(file,wo,staff_id)
+  def save_upload(file,wo,staff_id)
     logger.debug "+++ #{file.inspect}\n"
     logger.debug "--- #{staff_id}\n"
-    logger.debug "=== #{wo["workobject_id"].inspect}\n"
     logger.debug "=== #{wo["task_id"].inspect}\n"
     name =  file.original_filename
     directory = "uploads/#{wo['workobject_id']}"

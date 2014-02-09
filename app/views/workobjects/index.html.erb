@@ -1,11 +1,21 @@
 <div class="row display">
- <div class="small-3 columns">
-  <h4>Список объектов</h4>
- </div>
- <div class="small-3 small-offset-6 columns">
-  <%= link_to 'Добавить объект', new_workobject_path, class: "button radius"  %>
- </div>
-</div>
+  <div class="small-3 columns">
+    <h4>Список объектов</h4>
+  </div>
+  <div class="small-3 columns">
+    <%= form_tag workobjects_path, :method => 'get' do %>
+        <%= hidden_field_tag :direction, params[:direction] %>
+        <%= hidden_field_tag :sort, params[:sort] %>
+        <input name="search" size="20" type="text" value=<%=params[:search]%>>
+        </div>
+        <div class="small-3 columns">
+          <%= submit_tag "Найти", :name => nil %>
+    <% end %>
+    </div>
+    <div class="small-3 columns">
+      <%= link_to 'Добавить объект', new_workobject_path, class: "button radius" %>
+    </div>
+    </div>
 
 <% if flash[:error] %>
     <div id="error_explanation"><h2><%= flash[:error] %></h2></div>
@@ -13,30 +23,30 @@
 
 <table>
   <tr>
-    <th><%= sortable "id","№№" %></th>
-    <th><%= sortable "name","Название" %></th>
-    <th><%= sortable "city","Город" %></th>
-    <th><%= sortable "address","Адрес" %></th>
-    <th><%= sortable "region","Регион" %></th>
-    <th><%= sortable "staff_id","Ответственный" %></th>
-    <th><%= sortable "status","Статус" %></th>
+    <th><%= sortable "id","№№", params[:search] %></th>
+    <th><%= sortable "name","Название", params[:search] %></th>
+    <th><%= sortable "city","Город", params[:search] %></th>
+    <th><%= sortable "address","Адрес", params[:search] %></th>
+    <th><%= sortable "region","Регион", params[:search] %></th>
+    <th><%= sortable "staff_id","Ответственный", params[:search] %></th>
+    <th><%= sortable "status","Статус", params[:search] %></th>
     <th></th>
     <th></th>
   </tr>
 
-<% @workobjects.each do |workobject| %>
-  <tr class="<%= cycle :odd, :even %>">
-    <td><%= workobject.id %></td>
-    <td><%= link_to workobject.name, workobject %></td>
-    <td><%= workobject.city %></td>
-    <td><%= workobject.address %></td>
-    <td><%= workobject.region %></td>
-    <td><%= Staff.find(workobject.staff_id).lname %></td>
-    <td><%= workobject_status_hash[workobject.status] %></td>
-    <td><%= link_to 'Edit', edit_workobject_path(workobject) %></td>
-    <td><%= link_to 'Destroy', workobject, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+  <% @workobjects.each do |workobject| %>
+      <tr class="<%= cycle :odd, :even %>">
+        <td><%= workobject.id %></td>
+        <td><%= link_to workobject.name, workobject %></td>
+        <td><%= workobject.city %></td>
+        <td><%= workobject.address %></td>
+        <td><%= workobject.region %></td>
+        <td><%= Staff.find(workobject.staff_id).lname %></td>
+        <td><%= workobject_status_hash[workobject.status] %></td>
+        <td width=5%><%= link_to tag("img", { :src => "/images/button_edit.gif", :title =>'Edit', :alt=>'Edit',:border=>0,:size=>"17x17"}, false) , edit_workobject_path(workobject) %>
+          <%= link_to tag("img", { :src => "/images/button_drop.gif", :title =>'Destroy', :alt=>'Destroy',:border=>0}, false), workobject, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
 </table>
 
 <br />

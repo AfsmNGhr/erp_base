@@ -1,6 +1,6 @@
 <div class="row display">
- <div class="small-4 columns">
-  <h2>Список документов</h2>
+ <div class="small-3 columns">
+  <h4>Список документов</h4>
  </div>
  <div class="small-2 small-offset-7 columns">
   <%= link_to 'Новый файл', new_upload_path, class: "button radius"  %>
@@ -18,9 +18,7 @@
     <th>Размер</th>
     <th>Дата</th>
     <th></th>
-    <th></th>
   </tr>
-
 <% @uploads.each do |file| %>
   <tr>
     <% if file.workobject_id.nil? %>
@@ -31,8 +29,8 @@
     <td><%= link_to file.filename, upload_path(file) %></td>
     <td><%= file.size %></td>
     <td><%= file.created_at %></td>
-    <td><%= link_to 'Edit', edit_upload_path(file) %></td>
-    <td><%= link_to 'Destroy', file, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td width=5%><%= link_to tag("img", { :src => "/images/button_edit.gif", :title =>'Edit', :alt=>'Edit',:border=>0,:size=>"17x17"}, false) , edit_upload_path(file) %>
+      <%= link_to tag("img", { :src => "/images/button_drop.gif", :title =>'Destroy', :alt=>'Destroy',:border=>0}, false), file, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

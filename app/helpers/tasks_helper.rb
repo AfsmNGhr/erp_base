@@ -4,11 +4,11 @@ require 'cgi'
 
 
 module TasksHelper
-  def sortable(column, title = nil)
+  def sortable(column, title = nil,search)
     title ||= column.titleize
     css_class = column == sort_column ? "current #{sort_direction}" : nil
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
-    link_to title, {:sort => column, :direction => direction}, {:class => css_class}
+    link_to title, {:sort => column, :direction => direction, :search => search}, {:class => css_class}
   end
 
   def reps_join_upload_hash(id)

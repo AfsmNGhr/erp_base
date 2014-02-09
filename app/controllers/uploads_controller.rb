@@ -45,28 +45,11 @@ class UploadsController < ApplicationController
   end
 
   def create
-    @upload = Upload.new(params[upload])
-
-    respond_to do |format|
-      if @upload.save
-        format.html {
-          render :json => [@upload.to_jq_upload].to_json,
-          :content_type => 'text/html',
-          :layout => false
-        }
-        format.json { render json: {files: [@upload.to_jq_upload]}, status: :created, location: @upload }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @upload.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # POST /uploads
-  # POST /uploads.json
-  def upload
+     #  @upload = Upload.new(params[upload])
+     # POST /uploads
+     # POST /uploads.json
     upld = Upload.new
-    upld.rrr_upload(params[:filename],params[:uploads],@staff_login.id)
+    upld.save_upload(params[:upload][:filename],params[:upload],current_staff.id)
     respond_to do |format|
       format.html { redirect_to params[:ref], notice: 'Upload was successfully created.' }
 #action: 'index', status: 303 

@@ -13,7 +13,7 @@
 
     <div class="field">
       <b>Описание:</b><br>
-      <textarea cols="40" id="task_description" name="task[description]" >...</textarea>
+      <%= f.text_area :description, cols: 40 %>
     </div>
 <script type="text/javascript">
 $('task_description').keyup(function(){
@@ -32,19 +32,18 @@ $('task_description').keyup(function(){
     <div class="row">
       <div class="large-3 columns">
         <div class="field">
-          <b>Начало:</b><br>
-          <input type=date name="task[sdate]" value=<%= @task.sdate %> placeholder="large-3.columns">
+          <b>Начало:</b><br><input type=date name=task[sdate] value="<%=@task.sdate%>">
         </div>
       </div>
       <div class="large-3 columns">
         <div class="field">
-          <b>Окончание:</b><br>
-          <input type=date name="task[edate]" value=<%= @task.edate %> placeholder="large-3.columns">
+          <b>Окончание:</b><br> <input type=date name=task[edate] value="<%=@task.edate%>">
         </div>
+        <%= f.text_field :edate,class: "modelname_date" %>
       </div>
     </div><br>
     <div class="field">
-     <b>Выполение:</b><br>
+     <b>Выполнение:</b><br>
      <% 0.step(100,20) do |st| %>
        <%= f.radio_button :progress, st %><font style="background-color:<%=color_for_fontbg_hash[st]%>"><%=st%></font>
     <% end %>

@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+<%= form_tag finances_path, :method => 'get' do %>
+<div class="row display">
+ <div class="small-1 columns">
+  <h4>Финансы</h4>
+ </div>
+    <div class="small-3 columns">
+        <%= hidden_field_tag :direction, params[:direction] %>
+        <%= hidden_field_tag :sort, params[:sort] %>
+        <input name="search" size="20" type="text" value=<%=params[:search]%>>
+    </div>
+    <div class="small-1 columns">
+          <%= submit_tag "Найти", :name => nil %>
+    </div>
+ <div class="small-7 columns">
+  <%= link_to 'Добавить запись', new_finance_path, class: "button radius"  %>
+ </div>
+</div>
+<% end %>
+<table>
+  <tr>
+    <th><%= sortable "wo_full", "Объект", params[:search] %></th>
+    <th><%= sortable "staff_full","Сотрудник", params[:search] %></th>
+    <th><%= sortable "cost_type","Тип", params[:search] %></th>
+    <th><%= sortable "fin_item","Статья расходов", params[:search] %></th>
+    <th><%= sortable "staff_item","Тип выплат", params[:search] %></th>
+    <th><%= sortable "summa","Сумма", params[:search] %></th>
+    <th><%= sortable "d1","Дата1", params[:search] %></th>
+    <th><%= sortable "d2","Дата2", params[:search] %></th>
+    <th><%= sortable "remark","Примечение", params[:search] %></th>
+    <th><%= sortable "invoice","Счет/чек", params[:search] %></th>
+    <th></th>
+  </tr>
+
+<% @finances.each do |finance| %>
+  <tr>
+    <td><%= finance.wo_full.nil? ? "" : finance.wo_full[0..40]<<"..." %></td>
+    <td><%= finance.staff_full %></td>
+    <td><%= finance.cost_type %></td>
+    <td><%= finance.fin_item %></td>
+    <td><%= finance.staff_item %></td>
+    <td><%= finance.summa %></td>
+    <td><%= finance.d1 %></td>
+    <td><%= finance.d2 %></td>
+    <td><%= finance.remark %></td>
+    <td><%= finance.invoice %></td>
+    <td><%= link_to tag("img", { :src => "/images/button_edit.gif", :title =>'Edit', :alt=>'Edit',:border=>0,:size=>"17x17"}, false) ,  edit_finance_path(finance) %>
+    <%= link_to tag("img", { :src => "/images/button_drop.gif", :title =>'Destroy', :alt=>'Destroy',:border=>0}, false), finance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>

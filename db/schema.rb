@@ -11,12 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131218195852) do
+ActiveRecord::Schema.define(:version => 20140202075343) do
 
   create_table "data_files", :force => true do |t|
     t.string   "DataFile"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "finances", :force => true do |t|
+    t.integer  "workobject_id"
+    t.integer  "staff_id"
+    t.string   "cost_type"
+    t.string   "fin_item"
+    t.string   "staff_item"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.float    "summa"
+    t.date     "d1"
+    t.date     "d2"
+    t.text     "remark"
+    t.string   "invoice"
   end
 
   create_table "paymentcashes", :force => true do |t|
@@ -132,12 +147,13 @@ ActiveRecord::Schema.define(:version => 20131218195852) do
     t.string   "latitude"
     t.string   "longtitude"
     t.string   "address"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
     t.string   "region"
     t.integer  "staff_id"
     t.integer  "complete"
     t.string   "status"
+    t.string   "type_wo",    :default => "Объект заказчика"
   end
 
 end

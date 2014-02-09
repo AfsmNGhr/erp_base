@@ -1,0 +1,72 @@
+<%= form_for(@finance) do |f| %>
+  <% if @finance.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@finance.errors.count, "error") %> prohibited this finance from being saved:</h2>
+
+      <ul>
+      <% @finance.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+  <div class="large-6 columns">
+    <b>Объект:</b><br>
+    <%= f.select :workobject_id, Workobject.all.collect {|wo| [wo.name+", "+wo.city+", "+wo.address,wo.id] }, {include_blank: true} %>
+  </div>
+  </div>
+<div class="row">
+  <div class="large-6 columns">
+    <b>Сотрудник:</b><br>
+    <%= f.select :staff_id, Staff.all.collect {|st| [st.fullname ,st.id] }, {include_blank: true} %>
+  </div>
+</div>
+  <div class="row">
+<div class="large-6 columns">
+    <b>Тип:</b><br>
+    <%= f.select :cost_type, cost_type_array.collect {|ct| [ct,ct] } %>
+  </div>
+</div>
+<div class="row">
+<div class="large-6 columns">
+    <b>Статья расходов:</b><br />
+    <%= f.select :fin_item, fin_item_array.collect {|ct| [ct,ct] }, {include_blank: true} %>
+  </div>
+</div>
+<div class="row">
+  <div class="large-6 columns">
+    <b>Сумма:</b><br />
+    <%= f.text_field :summa %>
+  </div>
+</div>
+<div class="row">
+  <div class="large-6 columns">
+    <div class="large-3 columns">
+      <b>Дата1:</b>
+      <input type=date name=finance[d1] value="<%=@finance.d1%>" size=10>
+    </div>
+    <div class="large-3 columns">
+      <b>Дата2:</b>
+      <input type=date name=finance[d2] value="<%=@finance.d2%>" size=10>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="large-6 columns">
+    <b>Примечание:</b><br />
+    <%= f.text_area :remark, cols: 40 %>
+  </div>
+</div>
+<div class="row">
+  <div class="large-6 columns">
+    <b>Счет/чек:</b><br />
+    <%= f.text_field :invoice %>
+  </div>
+</div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
